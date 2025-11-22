@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock | FEC Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="stock.css">
+</head>
+
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <span class="material-icons-round">dashboard</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item" title="Home">
+                    <span class="material-icons-round">home</span>
+                </a>
+                <a href="operation.html" class="nav-item" title="Operations">
+                    <span class="material-icons-round">settings_suggest</span>
+                </a>
+                <a href="stock.html" class="nav-item active" title="Stock">
+                    <span class="material-icons-round">inventory_2</span>
+                </a>
+                <a href="#" class="nav-item" title="Move History">
+                    <span class="material-icons-round">history</span>
+                </a>
+                <a href="#" class="nav-item" title="Settings">
+                    <span class="material-icons-round">settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-bar">
+                <div class="page-title">Stock</div>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <span class="material-icons-round">search</span>
+                        <input type="text" placeholder="Search products...">
+                    </div>
+                    <div class="user-account">
+                        <span class="material-icons-round">account_circle</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Container -->
+            <section class="content-container">
+                <!-- Table Widget (The container that gets #F8F7FE) -->
+                <div class="table-widget">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>per unit cost</th>
+                                    <th>On hand</th>
+                                    <th>free to Use</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="stock-table-body">
+                                <!-- Rows will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const tableBody = document.getElementById('stock-table-body');
+
+            try {
+                const inventory = await api.getInventory();
+
+                if (inventory && inventory.results) {
+                    tableBody.innerHTML = ''; // Clear loading/placeholder
+
+                    inventory.results.forEach(item => {
+                        const row = document.createElement('tr');
+
+                        // Calculate "Free to Use" (Quantity - Reserved/Allocated)
+                        // Backend currently gives 'quantity'. We might need more fields for "Free to Use".
+                        // For now, we'll just show quantity.
+
+                        row.innerHTML = `
+                            <td class="product-name">${item.product_details.name}</td>
+                            <td>${item.product_details.cost_price || '-'}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.quantity}</td> <!-- Placeholder for Free to Use -->
+                            <td>
+                                <button class="btn-update">Update</button>
+                            </td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+
+                    // Add empty rows for styling if needed
+                    for (let i = 0; i < 3; i++) {
+                        const emptyRow = document.createElement('tr');
+                        emptyRow.className = 'empty-row';
+                        emptyRow.innerHTML = '<td></td><td></td><td></td><td></td><td></td>';
+                        tableBody.appendChild(emptyRow);
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load inventory', error);
+                tableBody.innerHTML = '<tr><td colspan="5">Failed to load data</td></tr>';
+            }
+        });
+    </script>
+</body>
+
+</html>

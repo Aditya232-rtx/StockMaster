@@ -1,0 +1,287 @@
+/* Reuse variables from dashboard.css where possible */
+:root {
+    --bg-main: #EDF6F7;
+    /* Main background */
+    --bg-widget: #F8F7FE;
+    /* Widget/Container background */
+    --bg-table: #FFFFFD;
+    /* Table background */
+    --text-primary: #000000;
+    /* Black text as requested */
+    --text-secondary: #666666;
+    --accent-color: #E0DDF1;
+    /* Lavender accent */
+    --sidebar-bg: #ffffff;
+    --font-family: 'Outfit', sans-serif;
+    --border-radius: 16px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.dashboard-wrapper {
+    display: flex;
+    height: 100%;
+}
+
+/* Sidebar (Copied from dashboard.css for consistency) */
+.sidebar {
+    width: 80px;
+    background-color: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-logo {
+    margin-bottom: 40px;
+    color: #333;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 12px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+}
+
+.nav-item {
+    color: #999;
+    padding: 12px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: var(--text-primary);
+    background-color: #f5f5f5;
+}
+
+.nav-item.active {
+    background-color: #e0f7fa;
+    color: #00acc1;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    overflow-y: auto;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    width: 300px;
+}
+
+.search-box .material-icons-round {
+    color: #999;
+    margin-right: 10px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-family: var(--font-family);
+    font-size: 0.95rem;
+}
+
+.user-account {
+    color: #fbc02d;
+    cursor: pointer;
+    font-size: 2rem;
+    background-color: #EDF6F7;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.user-account .material-icons-round {
+    font-size: 2.5rem;
+}
+
+/* Content Container */
+.content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Table Widget (The specific container with #F8F7FE) */
+.table-widget {
+    background-color: var(--bg-widget);
+    /* #F8F7FE */
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-wrapper {
+    background-color: var(--bg-table);
+    /* #FFFFFD */
+    border-radius: 12px;
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+th {
+    text-align: left;
+    padding: 15px;
+    color: var(--text-primary);
+    font-weight: 600;
+    border-bottom: 2px solid #eee;
+}
+
+td {
+    padding: 15px;
+    color: var(--text-primary);
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.product-name {
+    font-weight: 500;
+}
+
+.btn-update {
+    background-color: var(--accent-color);
+    color: #5e548e;
+    /* Darker shade of lavender for text contrast */
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-family: var(--font-family);
+}
+
+.btn-update:hover {
+    background-color: #d1cce8;
+}
+
+.empty-row td {
+    height: 50px;
+    border-bottom: 1px dashed #eee;
+    /* Dotted line effect */
+}
+
+.update-hint {
+    margin-top: 15px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: right;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-wrapper {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 20px;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        width: auto;
+        gap: 10px;
+    }
+
+    .sidebar-logo {
+        margin-bottom: 0;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+}
