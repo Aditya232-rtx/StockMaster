@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ML StockMaster Playground</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>StockMaster ML Micro Frontend</h1>
+        <p>Interact with demand forecasting, vendor price prediction, and inventory recommendations.</p>
+    </header>
+
+    <main>
+        <section class="card" id="data-section">
+            <header class="card__header">
+                <h2>Feature Inputs</h2>
+                <button id="loadSample" class="secondary">Load Sample Data</button>
+            </header>
+            <div class="card__content grid">
+                <div>
+                    <h3>Product Features</h3>
+                    <form id="productForm" class="feature-form"></form>
+                </div>
+                <div>
+                    <h3>Vendor Features</h3>
+                    <form id="vendorForm" class="feature-form"></form>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <header class="card__header">
+                <h2>Predict Demand</h2>
+                <button id="predictDemand">Run Demand Model</button>
+            </header>
+            <pre id="demandResult" class="result">Awaiting prediction...</pre>
+        </section>
+
+        <section class="card">
+            <header class="card__header">
+                <h2>Predict Vendor Price</h2>
+                <button id="predictPrice">Run Vendor Price Model</button>
+            </header>
+            <pre id="priceResult" class="result">Awaiting prediction...</pre>
+        </section>
+
+        <section class="card">
+            <header class="card__header">
+                <h2>Inventory Recommendation</h2>
+                <div class="inline">
+                    <label for="productId">Product ID</label>
+                    <input id="productId" type="text" placeholder="e.g. TEST-001" value="TEST-001" />
+                    <button id="getRecommendation">Get Recommendation</button>
+                </div>
+            </header>
+            <pre id="recommendationResult" class="result">Awaiting recommendation...</pre>
+        </section>
+    </main>
+
+    <footer>
+        <span>Status:</span>
+        <span id="healthStatus" class="chip">Checking...</span>
+    </footer>
+
+    <template id="inputTemplate">
+        <label class="input-group">
+            <span class="input-group__label"></span>
+            <input type="number" step="any" required />
+        </label>
+    </template>
+
+    <script src="app.js" type="module"></script>
+</body>
+</html>
