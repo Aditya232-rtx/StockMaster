@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Anomaly Detection Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Inventory Anomaly Detection</h1>
+        <p class="subtitle">Tune the model parameters and inspect the top flagged transactions.</p>
+    </header>
+
+    <main>
+        <section class="controls">
+            <form id="prediction-form">
+                <div class="field-group">
+                    <label for="contamination">Contamination</label>
+                    <input type="number" step="0.01" min="0.01" max="0.5" id="contamination" name="contamination" value="0.05" required>
+                </div>
+                <div class="field-group">
+                    <label for="n_estimators">Estimators</label>
+                    <input type="number" min="10" max="1000" id="n_estimators" name="n_estimators" value="100" required>
+                </div>
+                <div class="field-group">
+                    <label for="random_state">Random State</label>
+                    <input type="number" min="0" max="2147483647" id="random_state" name="random_state" value="42" required>
+                </div>
+                <div class="field-group">
+                    <label for="top_n">Top Results</label>
+                    <input type="number" min="1" max="200" id="top_n" name="top_n" value="20" required>
+                </div>
+                <button type="submit" id="run-btn">Run Detection</button>
+            </form>
+            <div id="status" role="status"></div>
+        </section>
+
+        <section class="summary" id="summary" hidden>
+            <h2>Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <span class="label">Total Transactions</span>
+                    <strong id="total-transactions">-</strong>
+                </div>
+                <div class="summary-card">
+                    <span class="label">Anomalies Detected</span>
+                    <strong id="anomalies-detected">-</strong>
+                </div>
+                <div class="summary-card">
+                    <span class="label">Anomaly Rate</span>
+                    <strong id="anomaly-rate">-</strong>
+                </div>
+            </div>
+            <div class="risk-table-wrapper">
+                <h3>Risk Level Distribution</h3>
+                <table id="risk-table">
+                    <thead>
+                        <tr>
+                            <th>Risk Level</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="results" id="results" hidden>
+            <h2>Top Anomalies</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>SKU</th>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>Location</th>
+                        <th>Risk</th>
+                        <th>Anomaly Score</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <template id="result-row-template">
+        <tr>
+            <td class="index"></td>
+            <td class="date"></td>
+            <td class="sku"></td>
+            <td class="type"></td>
+            <td class="quantity"></td>
+            <td class="location"></td>
+            <td class="risk"></td>
+            <td class="score"></td>
+        </tr>
+    </template>
+
+    <script>
+        const form = document.getElementById('prediction-form');
+        const statusEl = document.getElementById('status');
+        const summarySection = document.getElementById('summary');
+        const resultsSection = document.getElementById('results');
+        const resultsBody = document.getElementById('results-body');
+        const riskTableBody = document.querySelector('#risk-table tbody');
+        const template = document.getElementById('result-row-template');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            setStatus('Running detection...', 'info');
+            toggleLoading(true);
+
+            try {
+                const payload = Object.fromEntries(new FormData(form).entries());
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contamination: parseFloat(payload.contamination),
+                        n_estimators: parseInt(payload.n_estimators, 10),
+                        random_state: parseInt(payload.random_state, 10),
+                        top_n: parseInt(payload.top_n, 10)
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json().catch(() => ({ detail: 'Unexpected error' }));
+                    throw new Error(error.detail || 'API request failed');
+                }
+
+                const data = await response.json();
+                renderSummary(data.summary);
+                renderResults(data.top_anomalies);
+                setStatus('Detection complete.', 'success');
+            } catch (error) {
+                console.error(error);
+                setStatus(error.message || 'Unable to run detection.', 'error');
+            } finally {
+                toggleLoading(false);
+            }
+        });
+
+        function renderSummary(summary) {
+            document.getElementById('total-transactions').textContent = summary.total_transactions;
+            document.getElementById('anomalies-detected').textContent = summary.anomalies_detected;
+            document.getElementById('anomaly-rate').textContent = `${(summary.anomaly_rate * 100).toFixed(2)}%`;
+
+            riskTableBody.innerHTML = '';
+            const levels = Object.entries(summary.risk_distribution).sort((a, b) => a[0].localeCompare(b[0]));
+            levels.forEach(([level, count]) => {
+                const row = document.createElement('tr');
+                const levelCell = document.createElement('td');
+                levelCell.textContent = level;
+                const countCell = document.createElement('td');
+                countCell.textContent = count;
+                row.append(levelCell, countCell);
+                riskTableBody.appendChild(row);
+            });
+
+            summarySection.hidden = false;
+        }
+
+        function renderResults(anomalies) {
+            resultsBody.innerHTML = '';
+
+            anomalies.forEach((record, index) => {
+                const clone = template.content.cloneNode(true);
+                clone.querySelector('.index').textContent = index + 1;
+                clone.querySelector('.date').textContent = record.date || '—';
+                clone.querySelector('.sku').textContent = record.product_sku || '—';
+                clone.querySelector('.type').textContent = record.transaction_type || '—';
+                clone.querySelector('.quantity').textContent = record.quantity_change ?? '—';
+                clone.querySelector('.location').textContent = record.location || '—';
+                clone.querySelector('.risk').textContent = record.risk_level;
+                clone.querySelector('.score').textContent = record.anomaly_score.toFixed(4);
+                resultsBody.appendChild(clone);
+            });
+
+            resultsSection.hidden = anomalies.length === 0;
+        }
+
+        function setStatus(message, status) {
+            statusEl.textContent = message;
+            statusEl.className = status;
+        }
+
+        function toggleLoading(isLoading) {
+            const button = document.getElementById('run-btn');
+            button.disabled = isLoading;
+            button.textContent = isLoading ? 'Running...' : 'Run Detection';
+        }
+    </script>
+</body>
+</html>

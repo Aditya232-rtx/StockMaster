@@ -1,0 +1,485 @@
+sku,name,category,unit_cost,low_stock_threshold,reorder_quantity,lead_time_days
+PRD-00001,Steel Rods,Raw Materials,27.77,50,466,14
+PRD-00002,Steel Rods Variant 2,Raw Materials,24.32,50,567,10
+PRD-00003,Steel Rods Variant 3,Raw Materials,25.16,50,574,8
+PRD-00004,Steel Rods Variant 4,Raw Materials,28.88,50,473,14
+PRD-00005,Steel Rods Variant 5,Raw Materials,29.12,50,539,14
+PRD-00006,Steel Rods Variant 6,Raw Materials,26.57,50,524,8
+PRD-00007,Steel Rods Variant 7,Raw Materials,22.46,50,596,7
+PRD-00008,Steel Rods Variant 8,Raw Materials,20.36,50,469,8
+PRD-00009,Steel Rods Variant 9,Raw Materials,23.9,50,522,6
+PRD-00010,Steel Rods Variant 10,Raw Materials,27.32,50,433,3
+PRD-00011,Steel Rods Variant 11,Raw Materials,23.42,50,317,7
+PRD-00012,Steel Rods Variant 12,Raw Materials,26.74,50,444,13
+PRD-00013,Steel Rods Variant 13,Raw Materials,27.06,50,520,11
+PRD-00014,Steel Rods Variant 14,Raw Materials,29.47,50,339,12
+PRD-00015,Steel Rods Variant 15,Raw Materials,25.82,50,535,4
+PRD-00016,Aluminum Sheets,Raw Materials,28.13,40,368,11
+PRD-00017,Aluminum Sheets Variant 2,Raw Materials,28.52,40,438,10
+PRD-00018,Aluminum Sheets Variant 3,Raw Materials,31.59,40,453,7
+PRD-00019,Aluminum Sheets Variant 4,Raw Materials,32.36,40,499,12
+PRD-00020,Aluminum Sheets Variant 5,Raw Materials,33.98,40,509,5
+PRD-00021,Aluminum Sheets Variant 6,Raw Materials,30.41,40,441,10
+PRD-00022,Aluminum Sheets Variant 7,Raw Materials,25.07,40,493,6
+PRD-00023,Aluminum Sheets Variant 8,Raw Materials,35.35,40,363,9
+PRD-00024,Aluminum Sheets Variant 9,Raw Materials,25.24,40,450,9
+PRD-00025,Aluminum Sheets Variant 10,Raw Materials,31.57,40,340,12
+PRD-00026,Aluminum Sheets Variant 11,Raw Materials,34.37,40,376,7
+PRD-00027,Aluminum Sheets Variant 12,Raw Materials,29.43,40,357,7
+PRD-00028,Aluminum Sheets Variant 13,Raw Materials,33.51,40,431,7
+PRD-00029,Aluminum Sheets Variant 14,Raw Materials,30.69,40,331,6
+PRD-00030,Aluminum Sheets Variant 15,Raw Materials,26.58,40,338,11
+PRD-00031,Copper Wire,Raw Materials,38.6,35,309,13
+PRD-00032,Copper Wire Variant 2,Raw Materials,46.2,35,526,13
+PRD-00033,Copper Wire Variant 3,Raw Materials,46.33,35,575,6
+PRD-00034,Copper Wire Variant 4,Raw Materials,51.38,35,311,4
+PRD-00035,Copper Wire Variant 5,Raw Materials,47.62,35,502,7
+PRD-00036,Copper Wire Variant 6,Raw Materials,42.88,35,403,5
+PRD-00037,Copper Wire Variant 7,Raw Materials,41.75,35,484,7
+PRD-00038,Copper Wire Variant 8,Raw Materials,45.4,35,324,9
+PRD-00039,Copper Wire Variant 9,Raw Materials,38.65,35,404,11
+PRD-00040,Copper Wire Variant 10,Raw Materials,45.75,35,355,8
+PRD-00041,Copper Wire Variant 11,Raw Materials,48.69,35,554,13
+PRD-00042,Copper Wire Variant 12,Raw Materials,44.86,35,392,3
+PRD-00043,Copper Wire Variant 13,Raw Materials,40.75,35,302,12
+PRD-00044,Copper Wire Variant 14,Raw Materials,44.07,35,430,8
+PRD-00045,Copper Wire Variant 15,Raw Materials,46.71,35,417,14
+PRD-00046,Plastic Pellets,Raw Materials,16.49,60,390,5
+PRD-00047,Plastic Pellets Variant 2,Raw Materials,16.06,60,467,6
+PRD-00048,Plastic Pellets Variant 3,Raw Materials,15.38,60,508,13
+PRD-00049,Plastic Pellets Variant 4,Raw Materials,14.31,60,546,9
+PRD-00050,Plastic Pellets Variant 5,Raw Materials,13.51,60,552,4
+PRD-00051,Plastic Pellets Variant 6,Raw Materials,13.19,60,394,13
+PRD-00052,Plastic Pellets Variant 7,Raw Materials,13.79,60,351,6
+PRD-00053,Plastic Pellets Variant 8,Raw Materials,16.66,60,588,13
+PRD-00054,Plastic Pellets Variant 9,Raw Materials,17.57,60,371,9
+PRD-00055,Plastic Pellets Variant 10,Raw Materials,14.71,60,505,4
+PRD-00056,Plastic Pellets Variant 11,Raw Materials,16.97,60,413,5
+PRD-00057,Plastic Pellets Variant 12,Raw Materials,15.45,60,559,9
+PRD-00058,Plastic Pellets Variant 13,Raw Materials,12.41,60,582,9
+PRD-00059,Plastic Pellets Variant 14,Raw Materials,12.15,60,387,12
+PRD-00060,Plastic Pellets Variant 15,Raw Materials,12.41,60,354,14
+PRD-00061,Rubber Compound,Raw Materials,23.39,45,589,11
+PRD-00062,Rubber Compound Variant 2,Raw Materials,17.65,45,494,4
+PRD-00063,Rubber Compound Variant 3,Raw Materials,16.67,45,583,4
+PRD-00064,Rubber Compound Variant 4,Raw Materials,16.76,45,370,8
+PRD-00065,Rubber Compound Variant 5,Raw Materials,21.2,45,554,5
+PRD-00066,Rubber Compound Variant 6,Raw Materials,23.83,45,431,5
+PRD-00067,Rubber Compound Variant 7,Raw Materials,16.99,45,521,4
+PRD-00068,Rubber Compound Variant 8,Raw Materials,19.71,45,571,13
+PRD-00069,Rubber Compound Variant 9,Raw Materials,23.77,45,344,6
+PRD-00070,Rubber Compound Variant 10,Raw Materials,20.23,45,526,8
+PRD-00071,Rubber Compound Variant 11,Raw Materials,19.87,45,512,8
+PRD-00072,Rubber Compound Variant 12,Raw Materials,19.6,45,532,6
+PRD-00073,Rubber Compound Variant 13,Raw Materials,16.48,45,425,8
+PRD-00074,Rubber Compound Variant 14,Raw Materials,16.98,45,431,8
+PRD-00075,Rubber Compound Variant 15,Raw Materials,17.96,45,496,11
+PRD-00076,Titanium Alloy,Raw Materials,104.63,20,395,10
+PRD-00077,Titanium Alloy Variant 2,Raw Materials,118.15,20,438,13
+PRD-00078,Titanium Alloy Variant 3,Raw Materials,125.46,20,522,10
+PRD-00079,Titanium Alloy Variant 4,Raw Materials,97.86,20,305,10
+PRD-00080,Titanium Alloy Variant 5,Raw Materials,137.31,20,522,7
+PRD-00081,Titanium Alloy Variant 6,Raw Materials,101.94,20,480,13
+PRD-00082,Titanium Alloy Variant 7,Raw Materials,96.87,20,508,7
+PRD-00083,Titanium Alloy Variant 8,Raw Materials,126.32,20,335,6
+PRD-00084,Titanium Alloy Variant 9,Raw Materials,123.05,20,445,12
+PRD-00085,Titanium Alloy Variant 10,Raw Materials,115.19,20,312,8
+PRD-00086,Titanium Alloy Variant 11,Raw Materials,123.58,20,455,11
+PRD-00087,Titanium Alloy Variant 12,Raw Materials,137.2,20,463,11
+PRD-00088,Titanium Alloy Variant 13,Raw Materials,123.28,20,482,6
+PRD-00089,Titanium Alloy Variant 14,Raw Materials,104.49,20,583,8
+PRD-00090,Titanium Alloy Variant 15,Raw Materials,102.03,20,486,9
+PRD-00091,Carbon Fiber,Raw Materials,93.46,25,317,3
+PRD-00092,Carbon Fiber Variant 2,Raw Materials,82.38,25,406,5
+PRD-00093,Carbon Fiber Variant 3,Raw Materials,98.0,25,355,12
+PRD-00094,Carbon Fiber Variant 4,Raw Materials,91.35,25,432,6
+PRD-00095,Carbon Fiber Variant 5,Raw Materials,95.33,25,425,8
+PRD-00096,Carbon Fiber Variant 6,Raw Materials,82.6,25,475,12
+PRD-00097,Carbon Fiber Variant 7,Raw Materials,91.12,25,340,14
+PRD-00098,Carbon Fiber Variant 8,Raw Materials,68.44,25,432,10
+PRD-00099,Carbon Fiber Variant 9,Raw Materials,77.04,25,422,12
+PRD-00100,Carbon Fiber Variant 10,Raw Materials,70.36,25,436,6
+PRD-00101,Carbon Fiber Variant 11,Raw Materials,75.22,25,169,13
+PRD-00102,Carbon Fiber Variant 12,Raw Materials,90.52,25,104,11
+PRD-00103,Carbon Fiber Variant 13,Raw Materials,100.82,25,207,6
+PRD-00104,Carbon Fiber Variant 14,Raw Materials,71.24,25,134,8
+PRD-00105,Carbon Fiber Variant 15,Raw Materials,82.45,25,152,9
+PRD-00106,Stainless Steel,Raw Materials,39.04,45,231,9
+PRD-00107,Stainless Steel Variant 2,Raw Materials,36.23,45,85,7
+PRD-00108,Stainless Steel Variant 3,Raw Materials,33.62,45,87,10
+PRD-00109,Stainless Steel Variant 4,Raw Materials,35.35,45,208,8
+PRD-00110,Stainless Steel Variant 5,Raw Materials,36.32,45,196,10
+PRD-00111,Stainless Steel Variant 6,Raw Materials,39.48,45,91,10
+PRD-00112,Stainless Steel Variant 7,Raw Materials,37.35,45,201,14
+PRD-00113,Stainless Steel Variant 8,Raw Materials,40.25,45,106,9
+PRD-00114,Stainless Steel Variant 9,Raw Materials,29.13,45,208,4
+PRD-00115,Stainless Steel Variant 10,Raw Materials,41.75,45,124,7
+PRD-00116,Stainless Steel Variant 11,Raw Materials,29.72,45,195,12
+PRD-00117,Stainless Steel Variant 12,Raw Materials,41.88,45,139,6
+PRD-00118,Stainless Steel Variant 13,Raw Materials,41.46,45,131,12
+PRD-00119,Stainless Steel Variant 14,Raw Materials,41.2,45,194,9
+PRD-00120,Stainless Steel Variant 15,Raw Materials,32.09,45,245,14
+PRD-00121,Widget Model A,Finished Goods,163.78,25,207,14
+PRD-00122,Widget Model A Variant 2,Finished Goods,158.97,25,248,12
+PRD-00123,Widget Model A Variant 3,Finished Goods,140.06,25,213,5
+PRD-00124,Widget Model A Variant 4,Finished Goods,139.16,25,153,9
+PRD-00125,Widget Model A Variant 5,Finished Goods,143.79,25,189,6
+PRD-00126,Widget Model A Variant 6,Finished Goods,132.0,25,81,3
+PRD-00127,Widget Model A Variant 7,Finished Goods,174.71,25,194,12
+PRD-00128,Widget Model A Variant 8,Finished Goods,144.32,25,209,12
+PRD-00129,Widget Model A Variant 9,Finished Goods,172.27,25,126,13
+PRD-00130,Widget Model A Variant 10,Finished Goods,128.18,25,176,7
+PRD-00131,Widget Model A Variant 11,Finished Goods,179.76,25,222,8
+PRD-00132,Widget Model A Variant 12,Finished Goods,155.78,25,250,14
+PRD-00133,Widget Model A Variant 13,Finished Goods,179.31,25,126,11
+PRD-00134,Widget Model A Variant 14,Finished Goods,166.81,25,220,10
+PRD-00135,Widget Model A Variant 15,Finished Goods,130.44,25,133,7
+PRD-00136,Widget Model A Variant 16,Finished Goods,154.85,25,193,14
+PRD-00137,Widget Model A Variant 17,Finished Goods,140.31,25,90,8
+PRD-00138,Widget Model A Variant 18,Finished Goods,123.64,25,110,7
+PRD-00139,Widget Model A Variant 19,Finished Goods,134.8,25,83,8
+PRD-00140,Widget Model A Variant 20,Finished Goods,142.63,25,170,10
+PRD-00141,Widget Model B,Finished Goods,211.52,20,87,3
+PRD-00142,Widget Model B Variant 2,Finished Goods,231.97,20,185,13
+PRD-00143,Widget Model B Variant 3,Finished Goods,181.2,20,102,10
+PRD-00144,Widget Model B Variant 4,Finished Goods,237.6,20,168,10
+PRD-00145,Widget Model B Variant 5,Finished Goods,218.58,20,246,10
+PRD-00146,Widget Model B Variant 6,Finished Goods,169.1,20,123,3
+PRD-00147,Widget Model B Variant 7,Finished Goods,236.11,20,102,12
+PRD-00148,Widget Model B Variant 8,Finished Goods,182.47,20,99,6
+PRD-00149,Widget Model B Variant 9,Finished Goods,178.75,20,100,12
+PRD-00150,Widget Model B Variant 10,Finished Goods,187.34,20,200,3
+PRD-00151,Widget Model B Variant 11,Finished Goods,198.22,20,235,11
+PRD-00152,Widget Model B Variant 12,Finished Goods,182.23,20,220,12
+PRD-00153,Widget Model B Variant 13,Finished Goods,190.71,20,243,11
+PRD-00154,Widget Model B Variant 14,Finished Goods,230.64,20,99,12
+PRD-00155,Widget Model B Variant 15,Finished Goods,179.22,20,242,10
+PRD-00156,Widget Model B Variant 16,Finished Goods,176.76,20,178,7
+PRD-00157,Widget Model B Variant 17,Finished Goods,190.25,20,156,4
+PRD-00158,Widget Model B Variant 18,Finished Goods,214.31,20,175,4
+PRD-00159,Widget Model B Variant 19,Finished Goods,204.7,20,245,10
+PRD-00160,Widget Model B Variant 20,Finished Goods,171.7,20,245,4
+PRD-00161,Assembly Unit X,Finished Goods,322.69,15,188,9
+PRD-00162,Assembly Unit X Variant 2,Finished Goods,305.55,15,127,14
+PRD-00163,Assembly Unit X Variant 3,Finished Goods,310.78,15,111,10
+PRD-00164,Assembly Unit X Variant 4,Finished Goods,376.48,15,197,8
+PRD-00165,Assembly Unit X Variant 5,Finished Goods,311.79,15,145,11
+PRD-00166,Assembly Unit X Variant 6,Finished Goods,331.43,15,222,10
+PRD-00167,Assembly Unit X Variant 7,Finished Goods,417.51,15,189,13
+PRD-00168,Assembly Unit X Variant 8,Finished Goods,419.87,15,237,7
+PRD-00169,Assembly Unit X Variant 9,Finished Goods,312.96,15,188,12
+PRD-00170,Assembly Unit X Variant 10,Finished Goods,338.47,15,175,10
+PRD-00171,Assembly Unit X Variant 11,Finished Goods,357.66,15,207,10
+PRD-00172,Assembly Unit X Variant 12,Finished Goods,351.86,15,228,11
+PRD-00173,Assembly Unit X Variant 13,Finished Goods,335.73,15,144,7
+PRD-00174,Assembly Unit X Variant 14,Finished Goods,401.67,15,150,9
+PRD-00175,Assembly Unit X Variant 15,Finished Goods,352.76,15,131,8
+PRD-00176,Assembly Unit X Variant 16,Finished Goods,334.26,15,115,12
+PRD-00177,Assembly Unit X Variant 17,Finished Goods,355.93,15,225,7
+PRD-00178,Assembly Unit X Variant 18,Finished Goods,417.13,15,224,10
+PRD-00179,Assembly Unit X Variant 19,Finished Goods,322.3,15,178,5
+PRD-00180,Assembly Unit X Variant 20,Finished Goods,395.95,15,196,9
+PRD-00181,Assembly Unit Y,Finished Goods,445.59,12,223,8
+PRD-00182,Assembly Unit Y Variant 2,Finished Goods,389.09,12,242,8
+PRD-00183,Assembly Unit Y Variant 3,Finished Goods,466.1,12,243,13
+PRD-00184,Assembly Unit Y Variant 4,Finished Goods,439.07,12,96,12
+PRD-00185,Assembly Unit Y Variant 5,Finished Goods,410.07,12,213,5
+PRD-00186,Assembly Unit Y Variant 6,Finished Goods,343.27,12,178,10
+PRD-00187,Assembly Unit Y Variant 7,Finished Goods,427.09,12,245,4
+PRD-00188,Assembly Unit Y Variant 8,Finished Goods,391.83,12,249,5
+PRD-00189,Assembly Unit Y Variant 9,Finished Goods,472.32,12,223,14
+PRD-00190,Assembly Unit Y Variant 10,Finished Goods,427.23,12,162,14
+PRD-00191,Assembly Unit Y Variant 11,Finished Goods,455.17,12,173,6
+PRD-00192,Assembly Unit Y Variant 12,Finished Goods,440.09,12,212,3
+PRD-00193,Assembly Unit Y Variant 13,Finished Goods,440.74,12,172,3
+PRD-00194,Assembly Unit Y Variant 14,Finished Goods,367.46,12,226,6
+PRD-00195,Assembly Unit Y Variant 15,Finished Goods,395.4,12,166,9
+PRD-00196,Assembly Unit Y Variant 16,Finished Goods,375.79,12,117,7
+PRD-00197,Assembly Unit Y Variant 17,Finished Goods,402.36,12,146,10
+PRD-00198,Assembly Unit Y Variant 18,Finished Goods,336.02,12,94,4
+PRD-00199,Assembly Unit Y Variant 19,Finished Goods,367.99,12,232,7
+PRD-00200,Assembly Unit Y Variant 20,Finished Goods,377.36,12,146,4
+PRD-00201,Premium Widget,Finished Goods,578.55,10,207,12
+PRD-00202,Premium Widget Variant 2,Finished Goods,502.22,10,127,9
+PRD-00203,Premium Widget Variant 3,Finished Goods,637.34,10,146,14
+PRD-00204,Premium Widget Variant 4,Finished Goods,550.46,10,247,7
+PRD-00205,Premium Widget Variant 5,Finished Goods,555.38,10,212,11
+PRD-00206,Premium Widget Variant 6,Finished Goods,488.09,10,208,9
+PRD-00207,Premium Widget Variant 7,Finished Goods,609.68,10,108,6
+PRD-00208,Premium Widget Variant 8,Finished Goods,513.93,10,105,13
+PRD-00209,Premium Widget Variant 9,Finished Goods,542.72,10,173,3
+PRD-00210,Premium Widget Variant 10,Finished Goods,528.84,10,80,11
+PRD-00211,Premium Widget Variant 11,Finished Goods,569.77,10,154,14
+PRD-00212,Premium Widget Variant 12,Finished Goods,545.38,10,148,4
+PRD-00213,Premium Widget Variant 13,Finished Goods,620.66,10,198,12
+PRD-00214,Premium Widget Variant 14,Finished Goods,649.68,10,240,8
+PRD-00215,Premium Widget Variant 15,Finished Goods,517.49,10,246,12
+PRD-00216,Premium Widget Variant 16,Finished Goods,632.23,10,194,12
+PRD-00217,Premium Widget Variant 17,Finished Goods,467.04,10,177,5
+PRD-00218,Premium Widget Variant 18,Finished Goods,587.7,10,204,9
+PRD-00219,Premium Widget Variant 19,Finished Goods,574.31,10,216,13
+PRD-00220,Premium Widget Variant 20,Finished Goods,589.48,10,234,10
+PRD-00221,Industrial Unit,Finished Goods,860.56,8,115,8
+PRD-00222,Industrial Unit Variant 2,Finished Goods,873.54,8,196,11
+PRD-00223,Industrial Unit Variant 3,Finished Goods,608.28,8,217,11
+PRD-00224,Industrial Unit Variant 4,Finished Goods,621.36,8,208,5
+PRD-00225,Industrial Unit Variant 5,Finished Goods,648.38,8,92,13
+PRD-00226,Industrial Unit Variant 6,Finished Goods,639.66,8,235,4
+PRD-00227,Industrial Unit Variant 7,Finished Goods,708.34,8,184,7
+PRD-00228,Industrial Unit Variant 8,Finished Goods,825.75,8,196,11
+PRD-00229,Industrial Unit Variant 9,Finished Goods,816.92,8,158,12
+PRD-00230,Industrial Unit Variant 10,Finished Goods,815.44,8,209,8
+PRD-00231,Industrial Unit Variant 11,Finished Goods,770.84,8,130,12
+PRD-00232,Industrial Unit Variant 12,Finished Goods,724.04,8,117,12
+PRD-00233,Industrial Unit Variant 13,Finished Goods,601.99,8,215,9
+PRD-00234,Industrial Unit Variant 14,Finished Goods,688.49,8,152,12
+PRD-00235,Industrial Unit Variant 15,Finished Goods,733.78,8,236,11
+PRD-00236,Industrial Unit Variant 16,Finished Goods,802.56,8,241,13
+PRD-00237,Industrial Unit Variant 17,Finished Goods,717.72,8,219,4
+PRD-00238,Industrial Unit Variant 18,Finished Goods,761.55,8,198,9
+PRD-00239,Industrial Unit Variant 19,Finished Goods,690.51,8,145,5
+PRD-00240,Industrial Unit Variant 20,Finished Goods,824.09,8,246,10
+PRD-00241,Bearing Type 1,Components,5.82,100,206,11
+PRD-00242,Bearing Type 1 Variant 2,Components,4.62,100,98,9
+PRD-00243,Bearing Type 1 Variant 3,Components,4.45,100,84,14
+PRD-00244,Bearing Type 1 Variant 4,Components,5.55,100,198,11
+PRD-00245,Bearing Type 1 Variant 5,Components,4.46,100,143,12
+PRD-00246,Bearing Type 1 Variant 6,Components,5.76,100,112,9
+PRD-00247,Bearing Type 1 Variant 7,Components,5.27,100,204,3
+PRD-00248,Bearing Type 1 Variant 8,Components,5.62,100,183,3
+PRD-00249,Bearing Type 1 Variant 9,Components,4.78,100,202,13
+PRD-00250,Bearing Type 1 Variant 10,Components,4.92,100,219,6
+PRD-00251,Bearing Type 1 Variant 11,Components,5.77,100,102,6
+PRD-00252,Bearing Type 1 Variant 12,Components,5.77,100,90,8
+PRD-00253,Bearing Type 1 Variant 13,Components,5.97,100,94,4
+PRD-00254,Bearing Type 1 Variant 14,Components,4.78,100,174,4
+PRD-00255,Bearing Type 1 Variant 15,Components,4.46,100,248,14
+PRD-00256,Bearing Type 1 Variant 16,Components,5.9,100,179,3
+PRD-00257,Bearing Type 1 Variant 17,Components,5.28,100,219,10
+PRD-00258,Bearing Type 1 Variant 18,Components,4.66,100,122,10
+PRD-00259,Bearing Type 1 Variant 19,Components,5.54,100,140,10
+PRD-00260,Bearing Type 1 Variant 20,Components,5.66,100,115,5
+PRD-00261,Bolt M8,Components,0.42,500,224,8
+PRD-00262,Bolt M8 Variant 2,Components,0.41,500,109,4
+PRD-00263,Bolt M8 Variant 3,Components,0.5,500,248,8
+PRD-00264,Bolt M8 Variant 4,Components,0.41,500,246,8
+PRD-00265,Bolt M8 Variant 5,Components,0.45,500,203,8
+PRD-00266,Bolt M8 Variant 6,Components,0.54,500,96,3
+PRD-00267,Bolt M8 Variant 7,Components,0.58,500,188,14
+PRD-00268,Bolt M8 Variant 8,Components,0.53,500,111,12
+PRD-00269,Bolt M8 Variant 9,Components,0.53,500,84,10
+PRD-00270,Bolt M8 Variant 10,Components,0.57,500,94,14
+PRD-00271,Bolt M8 Variant 11,Components,0.56,500,237,6
+PRD-00272,Bolt M8 Variant 12,Components,0.56,500,118,9
+PRD-00273,Bolt M8 Variant 13,Components,0.45,500,132,5
+PRD-00274,Bolt M8 Variant 14,Components,0.42,500,104,5
+PRD-00275,Bolt M8 Variant 15,Components,0.6,500,134,12
+PRD-00276,Bolt M8 Variant 16,Components,0.53,500,126,6
+PRD-00277,Bolt M8 Variant 17,Components,0.44,500,124,8
+PRD-00278,Bolt M8 Variant 18,Components,0.42,500,188,5
+PRD-00279,Bolt M8 Variant 19,Components,0.47,500,86,13
+PRD-00280,Bolt M8 Variant 20,Components,0.55,500,134,10
+PRD-00281,Circuit Board,Components,20.42,50,109,14
+PRD-00282,Circuit Board Variant 2,Components,28.22,50,102,3
+PRD-00283,Circuit Board Variant 3,Components,21.06,50,150,5
+PRD-00284,Circuit Board Variant 4,Components,24.2,50,247,11
+PRD-00285,Circuit Board Variant 5,Components,26.98,50,174,10
+PRD-00286,Circuit Board Variant 6,Components,27.97,50,136,12
+PRD-00287,Circuit Board Variant 7,Components,22.48,50,222,9
+PRD-00288,Circuit Board Variant 8,Components,20.48,50,89,11
+PRD-00289,Circuit Board Variant 9,Components,20.75,50,192,6
+PRD-00290,Circuit Board Variant 10,Components,27.83,50,116,4
+PRD-00291,Circuit Board Variant 11,Components,25.66,50,172,5
+PRD-00292,Circuit Board Variant 12,Components,27.85,50,142,14
+PRD-00293,Circuit Board Variant 13,Components,21.42,50,162,9
+PRD-00294,Circuit Board Variant 14,Components,20.86,50,156,13
+PRD-00295,Circuit Board Variant 15,Components,25.84,50,140,4
+PRD-00296,Circuit Board Variant 16,Components,26.83,50,97,5
+PRD-00297,Circuit Board Variant 17,Components,27.45,50,155,5
+PRD-00298,Circuit Board Variant 18,Components,27.61,50,112,14
+PRD-00299,Circuit Board Variant 19,Components,29.27,50,224,5
+PRD-00300,Circuit Board Variant 20,Components,28.03,50,185,11
+PRD-00301,Motor 12V,Components,36.66,40,160,7
+PRD-00302,Motor 12V Variant 2,Components,39.49,40,172,9
+PRD-00303,Motor 12V Variant 3,Components,28.6,40,242,7
+PRD-00304,Motor 12V Variant 4,Components,35.3,40,178,9
+PRD-00305,Motor 12V Variant 5,Components,33.37,40,85,13
+PRD-00306,Motor 12V Variant 6,Components,42.0,40,232,10
+PRD-00307,Motor 12V Variant 7,Components,35.09,40,117,14
+PRD-00308,Motor 12V Variant 8,Components,28.64,40,177,5
+PRD-00309,Motor 12V Variant 9,Components,41.11,40,213,4
+PRD-00310,Motor 12V Variant 10,Components,29.17,40,194,10
+PRD-00311,Motor 12V Variant 11,Components,38.65,40,87,7
+PRD-00312,Motor 12V Variant 12,Components,41.86,40,245,13
+PRD-00313,Motor 12V Variant 13,Components,37.18,40,158,4
+PRD-00314,Motor 12V Variant 14,Components,30.97,40,106,10
+PRD-00315,Motor 12V Variant 15,Components,29.39,40,193,14
+PRD-00316,Motor 12V Variant 16,Components,29.3,40,140,14
+PRD-00317,Motor 12V Variant 17,Components,39.66,40,236,11
+PRD-00318,Motor 12V Variant 18,Components,29.46,40,99,9
+PRD-00319,Motor 12V Variant 19,Components,33.82,40,195,5
+PRD-00320,Motor 12V Variant 20,Components,31.39,40,115,4
+PRD-00321,Sensor Module,Components,52.43,35,183,11
+PRD-00322,Sensor Module Variant 2,Components,43.26,35,221,5
+PRD-00323,Sensor Module Variant 3,Components,45.71,35,106,7
+PRD-00324,Sensor Module Variant 4,Components,42.34,35,248,4
+PRD-00325,Sensor Module Variant 5,Components,47.09,35,222,5
+PRD-00326,Sensor Module Variant 6,Components,46.86,35,166,5
+PRD-00327,Sensor Module Variant 7,Components,42.36,35,130,13
+PRD-00328,Sensor Module Variant 8,Components,37.86,35,167,14
+PRD-00329,Sensor Module Variant 9,Components,43.03,35,178,4
+PRD-00330,Sensor Module Variant 10,Components,36.4,35,224,5
+PRD-00331,Sensor Module Variant 11,Components,37.62,35,169,5
+PRD-00332,Sensor Module Variant 12,Components,46.45,35,162,12
+PRD-00333,Sensor Module Variant 13,Components,45.82,35,189,6
+PRD-00334,Sensor Module Variant 14,Components,39.23,35,188,11
+PRD-00335,Sensor Module Variant 15,Components,48.31,35,153,11
+PRD-00336,Sensor Module Variant 16,Components,44.62,35,212,6
+PRD-00337,Sensor Module Variant 17,Components,45.6,35,170,4
+PRD-00338,Sensor Module Variant 18,Components,42.53,35,219,5
+PRD-00339,Sensor Module Variant 19,Components,40.68,35,80,12
+PRD-00340,Sensor Module Variant 20,Components,46.21,35,121,3
+PRD-00341,Control Unit,Components,77.95,30,184,14
+PRD-00342,Control Unit Variant 2,Components,56.02,30,238,4
+PRD-00343,Control Unit Variant 3,Components,61.54,30,220,14
+PRD-00344,Control Unit Variant 4,Components,69.1,30,179,13
+PRD-00345,Control Unit Variant 5,Components,63.18,30,126,3
+PRD-00346,Control Unit Variant 6,Components,55.74,30,112,5
+PRD-00347,Control Unit Variant 7,Components,54.79,30,230,11
+PRD-00348,Control Unit Variant 8,Components,54.71,30,173,3
+PRD-00349,Control Unit Variant 9,Components,72.65,30,211,7
+PRD-00350,Control Unit Variant 10,Components,73.47,30,170,5
+PRD-00351,Control Unit Variant 11,Components,77.48,30,63,7
+PRD-00352,Control Unit Variant 12,Components,55.32,30,55,5
+PRD-00353,Control Unit Variant 13,Components,54.32,30,49,10
+PRD-00354,Control Unit Variant 14,Components,61.8,30,32,3
+PRD-00355,Control Unit Variant 15,Components,74.8,30,59,5
+PRD-00356,Control Unit Variant 16,Components,72.01,30,41,6
+PRD-00357,Control Unit Variant 17,Components,62.71,30,38,4
+PRD-00358,Control Unit Variant 18,Components,70.18,30,38,13
+PRD-00359,Control Unit Variant 19,Components,68.18,30,34,4
+PRD-00360,Control Unit Variant 20,Components,58.8,30,60,11
+PRD-00361,Lubricant Oil,Consumables,10.59,30,32,14
+PRD-00362,Lubricant Oil Variant 2,Consumables,9.74,30,78,11
+PRD-00363,Lubricant Oil Variant 3,Consumables,14.02,30,74,5
+PRD-00364,Lubricant Oil Variant 4,Consumables,13.29,30,44,12
+PRD-00365,Lubricant Oil Variant 5,Consumables,13.24,30,30,14
+PRD-00366,Lubricant Oil Variant 6,Consumables,11.29,30,69,3
+PRD-00367,Lubricant Oil Variant 7,Consumables,12.82,30,64,8
+PRD-00368,Lubricant Oil Variant 8,Consumables,14.13,30,65,11
+PRD-00369,Lubricant Oil Variant 9,Consumables,10.1,30,34,3
+PRD-00370,Lubricant Oil Variant 10,Consumables,13.06,30,43,3
+PRD-00371,Lubricant Oil Variant 11,Consumables,12.78,30,71,4
+PRD-00372,Lubricant Oil Variant 12,Consumables,10.96,30,31,11
+PRD-00373,Lubricant Oil Variant 13,Consumables,14.35,30,40,10
+PRD-00374,Lubricant Oil Variant 14,Consumables,14.02,30,77,7
+PRD-00375,Lubricant Oil Variant 15,Consumables,12.5,30,59,3
+PRD-00376,Lubricant Oil Variant 16,Consumables,9.7,30,45,13
+PRD-00377,Lubricant Oil Variant 17,Consumables,12.62,30,57,14
+PRD-00378,Lubricant Oil Variant 18,Consumables,13.42,30,72,14
+PRD-00379,Lubricant Oil Variant 19,Consumables,11.36,30,77,14
+PRD-00380,Lubricant Oil Variant 20,Consumables,12.93,30,59,3
+PRD-00381,Lubricant Oil Variant 21,Consumables,12.25,30,71,7
+PRD-00382,Lubricant Oil Variant 22,Consumables,12.76,30,32,5
+PRD-00383,Lubricant Oil Variant 23,Consumables,13.12,30,47,3
+PRD-00384,Lubricant Oil Variant 24,Consumables,11.25,30,47,6
+PRD-00385,Lubricant Oil Variant 25,Consumables,11.78,30,58,13
+PRD-00386,Lubricant Oil Variant 26,Consumables,13.24,30,64,10
+PRD-00387,Lubricant Oil Variant 27,Consumables,12.01,30,71,7
+PRD-00388,Lubricant Oil Variant 28,Consumables,13.92,30,37,9
+PRD-00389,Lubricant Oil Variant 29,Consumables,10.33,30,44,14
+PRD-00390,Lubricant Oil Variant 30,Consumables,11.93,30,49,7
+PRD-00391,Lubricant Oil Variant 31,Consumables,9.75,30,38,13
+PRD-00392,Cleaning Solution,Consumables,7.96,40,37,7
+PRD-00393,Cleaning Solution Variant 2,Consumables,8.25,40,71,14
+PRD-00394,Cleaning Solution Variant 3,Consumables,7.41,40,58,4
+PRD-00395,Cleaning Solution Variant 4,Consumables,7.24,40,73,9
+PRD-00396,Cleaning Solution Variant 5,Consumables,9.04,40,77,9
+PRD-00397,Cleaning Solution Variant 6,Consumables,9.57,40,78,10
+PRD-00398,Cleaning Solution Variant 7,Consumables,8.72,40,32,8
+PRD-00399,Cleaning Solution Variant 8,Consumables,8.24,40,41,13
+PRD-00400,Cleaning Solution Variant 9,Consumables,8.0,40,71,11
+PRD-00401,Cleaning Solution Variant 10,Consumables,8.06,40,51,5
+PRD-00402,Cleaning Solution Variant 11,Consumables,8.59,40,31,11
+PRD-00403,Cleaning Solution Variant 12,Consumables,8.02,40,35,4
+PRD-00404,Cleaning Solution Variant 13,Consumables,8.83,40,69,10
+PRD-00405,Cleaning Solution Variant 14,Consumables,7.16,40,59,6
+PRD-00406,Cleaning Solution Variant 15,Consumables,9.21,40,33,8
+PRD-00407,Cleaning Solution Variant 16,Consumables,7.22,40,63,10
+PRD-00408,Cleaning Solution Variant 17,Consumables,8.3,40,40,6
+PRD-00409,Cleaning Solution Variant 18,Consumables,6.41,40,58,14
+PRD-00410,Cleaning Solution Variant 19,Consumables,7.33,40,79,10
+PRD-00411,Cleaning Solution Variant 20,Consumables,8.89,40,57,8
+PRD-00412,Cleaning Solution Variant 21,Consumables,7.23,40,52,5
+PRD-00413,Cleaning Solution Variant 22,Consumables,9.23,40,43,11
+PRD-00414,Cleaning Solution Variant 23,Consumables,7.1,40,40,6
+PRD-00415,Cleaning Solution Variant 24,Consumables,7.06,40,50,4
+PRD-00416,Cleaning Solution Variant 25,Consumables,6.98,40,36,9
+PRD-00417,Cleaning Solution Variant 26,Consumables,7.99,40,55,9
+PRD-00418,Cleaning Solution Variant 27,Consumables,8.59,40,36,12
+PRD-00419,Cleaning Solution Variant 28,Consumables,7.66,40,36,6
+PRD-00420,Cleaning Solution Variant 29,Consumables,9.21,40,69,6
+PRD-00421,Cleaning Solution Variant 30,Consumables,8.98,40,75,5
+PRD-00422,Cleaning Solution Variant 31,Consumables,9.47,40,40,11
+PRD-00423,Packaging Tape,Consumables,3.34,100,43,8
+PRD-00424,Packaging Tape Variant 2,Consumables,2.8,100,64,9
+PRD-00425,Packaging Tape Variant 3,Consumables,2.69,100,40,12
+PRD-00426,Packaging Tape Variant 4,Consumables,3.05,100,77,8
+PRD-00427,Packaging Tape Variant 5,Consumables,3.37,100,70,3
+PRD-00428,Packaging Tape Variant 6,Consumables,3.0,100,53,12
+PRD-00429,Packaging Tape Variant 7,Consumables,2.99,100,33,14
+PRD-00430,Packaging Tape Variant 8,Consumables,3.06,100,67,4
+PRD-00431,Packaging Tape Variant 9,Consumables,2.94,100,32,13
+PRD-00432,Packaging Tape Variant 10,Consumables,2.47,100,67,12
+PRD-00433,Packaging Tape Variant 11,Consumables,2.89,100,71,7
+PRD-00434,Packaging Tape Variant 12,Consumables,2.57,100,46,10
+PRD-00435,Packaging Tape Variant 13,Consumables,3.43,100,54,11
+PRD-00436,Packaging Tape Variant 14,Consumables,3.13,100,60,9
+PRD-00437,Packaging Tape Variant 15,Consumables,3.33,100,50,14
+PRD-00438,Packaging Tape Variant 16,Consumables,3.18,100,35,6
+PRD-00439,Packaging Tape Variant 17,Consumables,2.65,100,41,5
+PRD-00440,Packaging Tape Variant 18,Consumables,2.91,100,80,6
+PRD-00441,Packaging Tape Variant 19,Consumables,2.99,100,34,12
+PRD-00442,Packaging Tape Variant 20,Consumables,2.48,100,38,5
+PRD-00443,Packaging Tape Variant 21,Consumables,3.56,100,75,14
+PRD-00444,Packaging Tape Variant 22,Consumables,3.15,100,69,6
+PRD-00445,Packaging Tape Variant 23,Consumables,3.26,100,35,10
+PRD-00446,Packaging Tape Variant 24,Consumables,2.8,100,35,6
+PRD-00447,Packaging Tape Variant 25,Consumables,3.04,100,66,4
+PRD-00448,Packaging Tape Variant 26,Consumables,3.54,100,75,3
+PRD-00449,Packaging Tape Variant 27,Consumables,3.35,100,55,3
+PRD-00450,Packaging Tape Variant 28,Consumables,3.47,100,56,8
+PRD-00451,Packaging Tape Variant 29,Consumables,3.07,100,49,5
+PRD-00452,Packaging Tape Variant 30,Consumables,3.36,100,30,13
+PRD-00453,Packaging Tape Variant 31,Consumables,2.55,100,56,8
+PRD-00454,Adhesive,Consumables,16.98,35,73,6
+PRD-00455,Adhesive Variant 2,Consumables,17.93,35,74,4
+PRD-00456,Adhesive Variant 3,Consumables,15.45,35,54,12
+PRD-00457,Adhesive Variant 4,Consumables,12.41,35,80,8
+PRD-00458,Adhesive Variant 5,Consumables,16.81,35,67,7
+PRD-00459,Adhesive Variant 6,Consumables,12.76,35,53,3
+PRD-00460,Adhesive Variant 7,Consumables,14.34,35,58,13
+PRD-00461,Adhesive Variant 8,Consumables,17.29,35,65,6
+PRD-00462,Adhesive Variant 9,Consumables,17.59,35,62,4
+PRD-00463,Adhesive Variant 10,Consumables,15.51,35,44,5
+PRD-00464,Adhesive Variant 11,Consumables,13.26,35,68,4
+PRD-00465,Adhesive Variant 12,Consumables,16.95,35,77,10
+PRD-00466,Adhesive Variant 13,Consumables,16.89,35,41,3
+PRD-00467,Adhesive Variant 14,Consumables,14.21,35,38,5
+PRD-00468,Adhesive Variant 15,Consumables,12.54,35,71,7
+PRD-00469,Adhesive Variant 16,Consumables,14.01,35,63,3
+PRD-00470,Adhesive Variant 17,Consumables,17.07,35,47,4
+PRD-00471,Adhesive Variant 18,Consumables,15.9,35,54,5
+PRD-00472,Adhesive Variant 19,Consumables,14.1,35,63,11
+PRD-00473,Adhesive Variant 20,Consumables,17.28,35,78,3
+PRD-00474,Adhesive Variant 21,Consumables,14.9,35,61,3
+PRD-00475,Adhesive Variant 22,Consumables,14.58,35,31,3
+PRD-00476,Adhesive Variant 23,Consumables,15.48,35,31,5
+PRD-00477,Adhesive Variant 24,Consumables,15.34,35,71,9
+PRD-00478,Adhesive Variant 25,Consumables,17.05,35,37,5
+PRD-00479,Adhesive Variant 26,Consumables,16.58,35,79,13
+PRD-00480,Adhesive Variant 27,Consumables,13.54,35,51,6
+PRD-00481,Adhesive Variant 28,Consumables,16.15,35,66,8
+PRD-00482,Adhesive Variant 29,Consumables,16.99,35,80,12
+PRD-00483,Adhesive Variant 30,Consumables,17.78,35,36,11
+PRD-00484,Adhesive Variant 31,Consumables,13.68,35,42,12

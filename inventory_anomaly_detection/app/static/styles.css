@@ -1,0 +1,207 @@
+/* Styles for the Inventory Anomaly Detection dashboard */
+:root {
+    color-scheme: light dark;
+    --bg-color: #f8f9fb;
+    --card-bg: #ffffffcc;
+    --primary: #1f6feb;
+    --text-color: #1a1f36;
+    --muted: #6b7280;
+    --border: #d1d5db;
+    --shadow: 0 18px 40px -24px rgba(31, 111, 235, 0.45);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #0f172a;
+        --card-bg: #1e293bcc;
+        --text-color: #f8fafc;
+        --muted: #cbd5f5;
+        --border: #334155;
+        --shadow: 0 18px 40px -24px rgba(148, 163, 184, 0.45);
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 2rem clamp(1.5rem, 4vw, 4rem);
+}
+
+header {
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+}
+
+.subtitle {
+    color: var(--muted);
+    margin: 0 auto;
+    max-width: 560px;
+}
+
+main {
+    display: grid;
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.controls, .summary, .results {
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+.controls form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.25rem;
+    align-items: end;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.field-group label {
+    font-weight: 600;
+}
+
+.field-group input {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.65rem 0.75rem;
+    font-size: 1rem;
+    background: transparent;
+    color: inherit;
+}
+
+button {
+    padding: 0.85rem 1rem;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: progress;
+}
+
+#status {
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+#status.info {
+    color: var(--muted);
+}
+
+#status.success {
+    color: #16a34a;
+}
+
+#status.error {
+    color: #dc2626;
+}
+
+.summary-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    margin-bottom: 1.5rem;
+}
+
+.summary-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem;
+    display: grid;
+    gap: 0.35rem;
+}
+
+.summary-card .label {
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.75rem;
+}
+
+.summary-card strong {
+    font-size: 1.65rem;
+}
+
+.risk-table-wrapper {
+    overflow-x: auto;
+}
+
+.risk-table-wrapper table,
+.results table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.risk-table-wrapper th,
+.risk-table-wrapper td,
+.results th,
+.results td {
+    padding: 0.75rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+
+.results table thead {
+    background: rgba(31, 111, 235, 0.09);
+}
+
+.results tbody tr:nth-child(even) {
+    background: rgba(31, 111, 235, 0.05);
+}
+
+.results td.score {
+    font-variant-numeric: tabular-nums;
+}
+
+.results td.risk {
+    font-weight: 600;
+}
+
+@media (max-width: 720px) {
+    body {
+        padding: 1.5rem;
+    }
+
+    .controls form {
+        grid-template-columns: 1fr;
+    }
+
+    .results table, .risk-table-wrapper table {
+        font-size: 0.9rem;
+    }
+}
