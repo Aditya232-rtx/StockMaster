@@ -1,315 +1,270 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ethers } from "ethers";
 import { Html5Qrcode } from "html5-qrcode";
+import { Wallet, QrCode, Scan, Upload, Download, CheckCircle, AlertCircle } from 'lucide-react';
 import TrackerAbi from "./TrackerAbi.json";
 import GenerateQR from './GenerateQR';
 import './styles.css';
 
 // Try to load contract address from deployments.json
-let TRACKER_ADDRESS = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707"; // Fallback
+const TRACKER_ADDRESS = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707"; // Fallback
 
 export default function App() {
-  const [provider, setProvider] = useState(null);
-  const [signer, setSigner] = useState(null);
-  const [contract, setContract] = useState(null);
-  const [itemId, setItemId] = useState("");
-  const [note, setNote] = useState("");
-  const [status, setStatus] = useState(1);
-  const [logs, setLogs] = useState([]);
-  const [itemHash, setItemHash] = useState("");
-  const [contractAddress, setContractAddress] = useState(TRACKER_ADDRESS);
-  const qrRef = useRef(null);
-  const scannerRef = useRef(null);
+    const [provider, setProvider] = useState(null);
+    const [signer, setSigner] = useState(null);
+    const [contract, setContract] = useState(null);
+    const [itemId, setItemId] = useState("S6743578"); // Default as requested
+    const [note, setNote] = useState("");
+    const [status, setStatus] = useState(1);
+    const [logs, setLogs] = useState([]);
+    const [itemHash, setItemHash] = useState("");
+    const [contractAddress, setContractAddress] = useState(TRACKER_ADDRESS);
+    const qrRef = useRef(null);
+    const scannerRef = useRef(null);
+    const [isScanning, setIsScanning] = useState(false);
 
-  // Load contract address from deployments.json on mount
-  useEffect(() => {
-    async function loadDeploymentData() {
-      try {
-        const response = await fetch('/deployments.json');
-        if (response.ok) {
-          const deployments = await response.json();
-          const latestDeployment = deployments
-            .filter(d => d.network === 'localhost')
-            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))[0];
+    // Load contract address from deployments.json on mount
+    useEffect(() => {
+        async function loadDeploymentData() {
+            try {
+                const response = await fetch('/deployments.json');
+                if (response.ok) {
+                    const deployments = await response.json();
+                    const latestDeployment = deployments
+                        .filter(d => d.network === 'localhost')
+                        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))[0];
 
-          if (latestDeployment) {
-            setContractAddress(latestDeployment.contractAddress);
-            console.log("Loaded contract address from deployments.json:", latestDeployment.contractAddress);
-          }
+                    if (latestDeployment) {
+                        setContractAddress(latestDeployment.contractAddress);
+                    }
+                }
+            } catch (err) {
+                console.log("Could not load deployments.json, using fallback address");
+            }
         }
-      } catch (err) {
-        console.log("Could not load deployments.json, using fallback address");
-      }
+        loadDeploymentData();
+    }, []);
+
+    function generateHash(itemId, metadata = {}) {
+        const hashInput = JSON.stringify({ itemId, ...metadata });
+        return ethers.utils.id(hashInput);
     }
-    loadDeploymentData();
-  }, []);
 
-  function generateHash(itemId, metadata = {}) {
-    const hashInput = JSON.stringify({ itemId, ...metadata });
-    return ethers.utils.id(hashInput);
-  }
-
-  async function connect() {
-    if (window.ethereum) {
-      const p = new ethers.providers.Web3Provider(window.ethereum);
-      await p.send("eth_requestAccounts", []);
-      const s = p.getSigner();
-      setProvider(p);
-      setSigner(s);
-      const c = new ethers.Contract(contractAddress, TrackerAbi, s);
-      setContract(c);
-      alert("Connected");
-    } else {
-      alert("Install MetaMask");
+    async function connect() {
+        if (window.ethereum) {
+            const p = new ethers.providers.Web3Provider(window.ethereum);
+            await p.send("eth_requestAccounts", []);
+            const s = p.getSigner();
+            setProvider(p);
+            setSigner(s);
+            const c = new ethers.Contract(contractAddress, TrackerAbi, s);
+            setContract(c);
+            alert("Connected");
+        } else {
+            alert("Install MetaMask");
+        }
     }
-  }
 
-  async function registerItem() {
-    if (!contract) return alert("Connect first");
-    if (!itemId) return alert("Enter item ID");
-
-    const hash = generateHash(itemId, {});
-    setItemHash(hash);
-
-    try {
-      const tx = await contract.registerItem(itemId, hash);
-      await tx.wait();
-      alert(`Item registered! Hash: ${hash.substring(0, 16)}...`);
-    } catch (err) {
-      alert("Registration failed: " + err.message);
-    }
-  }
-
-  async function sendUpdate() {
-    if (!contract) return alert("Connect first");
-    const tx = await contract.updateItem(itemId, status, note);
-    await tx.wait();
-    alert("Update recorded. Tx: " + tx.hash);
-    loadHistory();
-  }
-
-  async function loadHistory() {
-    if (!contract) return;
-    const len = await contract.getUpdatesLength(itemId);
-    const l = [];
-    for (let i = 0; i < Number(len); i++) {
-      const u = await contract.getUpdateByIndex(itemId, i);
-      l.push({
-        actor: u.actor,
-        status: u.status.toNumber(),
-        note: u.note,
-        timestamp: new Date(u.timestamp.toNumber() * 1000).toLocaleString(),
-        itemHash: u.itemHash
-      });
-    }
-    setLogs(l);
-
-    if (len > 0) {
-      const hash = await contract.getItemHash(itemId);
-      setItemHash(hash);
-    }
-  }
-
-  function startScanner() {
-    if (scannerRef.current) return;
-    const html5QrCode = new Html5Qrcode("qr-reader");
-    scannerRef.current = html5QrCode;
-    html5QrCode.start(
-      { facingMode: "environment" },
-      { fps: 10, qrbox: 250 },
-      (decodedText, decodedResult) => {
+    async function sendUpdate() {
+        if (!contract) return alert("Connect first");
         try {
-          const data = JSON.parse(decodedText);
-          setItemId(data.itemId);
-          if (data.itemHash) {
-            setItemHash(data.itemHash);
-            console.log("Scanned item with hash:", data.itemHash);
-          }
-        } catch (e) {
-          setItemId(decodedText);
+            const tx = await contract.updateItem(itemId, status, note);
+            await tx.wait();
+            alert("Update recorded. Tx: " + tx.hash);
+            loadHistory();
+        } catch (err) {
+            alert("Update failed: " + err.message);
         }
-        html5QrCode.stop().then(() => { scannerRef.current = null; }).catch(() => { });
-      },
-      (errorMessage) => { }
-    ).catch(err => {
-      alert("Unable to start camera. " + err);
-    });
-  }
-
-  function stopScanner() {
-    if (scannerRef.current) {
-      scannerRef.current.stop();
-      scannerRef.current = null;
     }
-  }
 
-  return (
-    <div className="min-h-screen bg-page-bg">
-      {/* Header */}
-      <header className="bg-card-bg shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-semibold text-gray-900">Blockchain Tracker</h1>
-          <p className="text-sm text-gray-500 mt-1">Contract: {contractAddress.substring(0, 10)}...{contractAddress.substring(38)}</p>
-        </div>
-      </header>
+    async function loadHistory() {
+        if (!contract) return;
+        try {
+            const len = await contract.getUpdatesLength(itemId);
+            const l = [];
+            for (let i = 0; i < Number(len); i++) {
+                const u = await contract.getUpdateByIndex(itemId, i);
+                l.push({
+                    actor: u.actor,
+                    status: u.status.toNumber(),
+                    note: u.note,
+                    timestamp: new Date(u.timestamp.toNumber() * 1000).toLocaleString(),
+                    itemHash: u.itemHash
+                });
+            }
+            setLogs(l);
 
-      {/* Main Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            if (len > 0) {
+                const hash = await contract.getItemHash(itemId);
+                setItemHash(hash);
+            }
+        } catch (err) {
+            console.error("Error loading history:", err);
+        }
+    }
 
-          {/* Column 1 */}
-          <div className="space-y-6">
+    function startScanner() {
+        if (scannerRef.current) return;
+        const html5QrCode = new Html5Qrcode("qr-reader");
+        scannerRef.current = html5QrCode;
+        setIsScanning(true);
+        html5QrCode.start(
+            { facingMode: "environment" },
+            { fps: 10, qrbox: 250 },
+            (decodedText, decodedResult) => {
+                try {
+                    const data = JSON.parse(decodedText);
+                    setItemId(data.itemId);
+                    if (data.itemHash) {
+                        setItemHash(data.itemHash);
+                    }
+                } catch (e) {
+                    setItemId(decodedText);
+                }
+                html5QrCode.stop().then(() => {
+                    scannerRef.current = null;
+                    setIsScanning(false);
+                }).catch(() => { });
+            },
+            (errorMessage) => { }
+        ).catch(err => {
+            alert("Unable to start camera. " + err);
+            setIsScanning(false);
+        });
+    }
 
-            {/* Card 1: Wallet Connection */}
-            <div className="bg-card-bg rounded-xl shadow-md p-6 border border-accent">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Wallet Connection</h2>
-              <button
-                onClick={connect}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 mb-4"
-              >
-                Connect MetaMask
-              </button>
+    function stopScanner() {
+        if (scannerRef.current) {
+            scannerRef.current.stop();
+            scannerRef.current = null;
+            setIsScanning(false);
+        }
+    }
 
-              <div className="mt-6">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">QR Scanner</h3>
-                <div id="qr-reader" ref={qrRef} className="mb-4 rounded-lg overflow-hidden"></div>
-                <div className="flex gap-3">
-                  <button
-                    onClick={startScanner}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
-                  >
-                    Start Scanner
-                  </button>
-                  <button
-                    onClick={stopScanner}
-                    className="flex-1 border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg transition duration-200"
-                  >
-                    Stop Scanner
-                  </button>
+    return (
+        <div className="min-h-screen bg-[#EDF6F7] p-4 sm:p-8 font-sans text-black">
+            {/* Header */}
+            <header className="mb-8 max-w-7xl mx-auto">
+                <h1 className="text-3xl font-bold text-black tracking-tight">Blockchain Tracker</h1>
+                <div className="mt-3 flex items-center text-sm text-gray-700 bg-[#F8F7FE] px-4 py-2 rounded-xl w-fit shadow-sm border border-white/50">
+                    <span className="font-mono text-xs">
+                        Contract: {contractAddress}
+                    </span>
                 </div>
-              </div>
-            </div>
+            </header>
 
-            {/* Card 2: Student Record */}
-            <div className="bg-card-bg rounded-xl shadow-md p-6 border border-accent">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                Item Record: <span className="text-blue-600">{itemId || "Not Set"}</span>
-              </h2>
+            {/* Main Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+                {/* LEFT COLUMN */}
+                <div className="space-y-8">
+                    {/* Wallet Connection Card */}
+                    <div className="bg-[#F8F7FE] rounded-2xl shadow-sm p-8 border border-white/60">
+                        <h2 className="text-xl font-bold text-black mb-6 flex items-center gap-3">
+                            <div className="p-2 bg-white rounded-lg shadow-sm">
+                                <Wallet className="w-5 h-5 text-black" />
+                            </div>
+                            Wallet Connection
+                        </h2>
 
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Item ID (from QR)</label>
-                  <input
-                    type="text"
-                    placeholder="Enter or scan item ID"
-                    value={itemId}
-                    onChange={e => setItemId(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                  {itemHash && (
-                    <p className="text-xs text-gray-500 mt-1">
-                      Hash: {itemHash.substring(0, 20)}...
-                    </p>
-                  )}
-                </div>
+                        <button
+                            onClick={connect}
+                            className={`w-full py-4 px-6 rounded-xl font-bold mb-8 transition-all flex items-center justify-center gap-3 shadow-sm hover:shadow-md ${provider
+                                    ? 'bg-green-500 hover:bg-green-600 text-white'
+                                    : 'bg-black hover:bg-gray-800 text-white'
+                                }`}
+                        >
+                            {provider ? (
+                                <>
+                                    <CheckCircle className="w-5 h-5" />
+                                    <span>Connected to MetaMask</span>
+                                </>
+                            ) : (
+                                <>
+                                    <Wallet className="w-5 h-5" />
+                                    <span>Connect MetaMask</span>
+                                </>
+                            )}
+                        </button>
 
-                <button
-                  onClick={registerItem}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
-                >
-                  Register Item
-                </button>
+                        {/* Scanner Section */}
+                        <div className="space-y-6">
+                            <div
+                                id="qr-reader"
+                                className="rounded-2xl overflow-hidden bg-white min-h-[240px] flex items-center justify-center border-2 border-dashed border-gray-200"
+                            >
+                                {!isScanning ? (
+                                    <div className="text-center p-6">
+                                        <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <Scan className="w-8 h-8 text-gray-400" />
+                                        </div>
+                                        <p className="text-sm font-medium text-gray-500">Camera Preview Area</p>
+                                    </div>
+                                ) : null}
+                            </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Checkpoint</label>
-                  <select
-                    value={status}
-                    onChange={e => setStatus(Number(e.target.value))}
-                    className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    <option value={1}>Packed</option>
-                    <option value={2}>Dispatched</option>
-                    <option value={3}>InTransit</option>
-                    <option value={4}>Checkpoint</option>
-                    <option value={5}>Delivered</option>
-                    <option value={6}>Received</option>
-                  </select>
-                </div>
+                            <div className="flex gap-4">
+                                <button
+                                    onClick={startScanner}
+                                    disabled={isScanning}
+                                    className={`flex-1 py-3 px-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${isScanning
+                                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                            : 'bg-white border border-gray-200 text-black hover:bg-gray-50 hover:border-gray-300 shadow-sm'
+                                        }`}
+                                >
+                                    <Scan className="w-4 h-4" />
+                                    <span>Start Scanner</span>
+                                </button>
+                                <button
+                                    onClick={stopScanner}
+                                    disabled={!isScanning}
+                                    className={`flex-1 py-3 px-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${!isScanning
+                                            ? 'bg-gray-50 text-gray-300 cursor-not-allowed border border-gray-100'
+                                            : 'bg-white border border-gray-200 text-red-600 hover:bg-red-50 hover:border-red-200 shadow-sm'
+                                        }`}
+                                >
+                                    <span>Stop Scanner</span>
+                                </button>
+                            </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Note</label>
-                  <input
-                    type="text"
-                    placeholder="Enter note"
-                    value={note}
-                    onChange={e => setNote(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div className="flex gap-3 pt-2">
-                  <button
-                    onClick={sendUpdate}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200"
-                  >
-                    Send Update
-                  </button>
-                  <button
-                    onClick={loadHistory}
-                    className="flex-1 border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-3 px-4 rounded-lg transition duration-200"
-                  >
-                    Load History
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Column 2 */}
-          <div className="space-y-6">
-
-            {/* Card 3: Generate QR Code */}
-            <GenerateQR />
-
-            {/* Card 4: History */}
-            <div className="bg-card-bg rounded-xl shadow-md p-6 border border-accent">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">History</h2>
-
-              {logs.length === 0 ? (
-                <div className="bg-gray-50 rounded-lg p-8 text-center">
-                  <p className="text-gray-500">No history yet. Load history to see updates.</p>
-                </div>
-              ) : (
-                <div className="space-y-3 max-h-96 overflow-y-auto">
-                  {logs.map((l, idx) => (
-                    <div key={idx} className="bg-accent bg-opacity-30 rounded-lg p-4 border border-accent">
-                      <div className="flex justify-between items-start mb-2">
-                        <span className="text-sm font-semibold text-gray-900">{l.timestamp}</span>
-                        <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-                          Status {l.status}
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-700 mb-1">{l.note}</p>
-                      <p className="text-xs text-gray-500">By: {l.actor.substring(0, 10)}...{l.actor.substring(38)}</p>
-                      {l.itemHash && l.itemHash !== ethers.constants.HashZero && (
-                        <p className="text-xs text-gray-400 mt-1">Hash: {l.itemHash.substring(0, 16)}...</p>
-                      )}
+                            {/* Status Display */}
+                            <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+                                <div className="flex items-center gap-3 text-sm">
+                                    <div className="relative flex h-3 w-3">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                                    </div>
+                                    <span className="font-bold text-gray-900">System Status:</span>
+                                    <span className="text-gray-600">Ready to scan</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
 
-            {/* Chart Visualization Placeholder */}
-            <div className="bg-card-bg rounded-xl shadow-md p-6 border border-accent">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Visualization</h2>
-              <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center">
-                <p className="text-gray-500 text-center">Chart visualization will appear here...</p>
-              </div>
+                    {/* Action Buttons */}
+                    <div className="grid grid-cols-2 gap-4">
+                        <button
+                            onClick={sendUpdate}
+                            className="bg-black hover:bg-gray-800 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                        >
+                            <Upload className="w-5 h-5" />
+                            <span>Send Update</span>
+                        </button>
+                        <button
+                            onClick={loadHistory}
+                            className="bg-white hover:bg-gray-50 text-black border border-gray-200 font-bold py-4 px-6 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2"
+                        >
+                            <Download className="w-5 h-5" />
+                            <span>Load History</span>
+                        </button>
+                    </div>
+                </div>
+
+                {/* RIGHT COLUMN */}
+                <div className="space-y-6">
+                    {/* Generate QR Code Card */}
+                    <GenerateQR />
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  )
+    )
 }
