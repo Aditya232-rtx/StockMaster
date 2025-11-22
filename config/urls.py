@@ -17,17 +17,25 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 from inventory_core.views import (
-    ReceiptViewSet, 
-    DashboardKPIView, 
-    DeliveryOrderViewSet, 
+    ReceiptViewSet,
+    DashboardKPIView,
+    DeliveryOrderViewSet,
     InternalTransferViewSet,
     StockAdjustmentViewSet,
     ProductViewSet,
-    LocationViewSet, 
-    ProductCategoryViewSet, 
-    UnitOfMeasureViewSet, 
-    StockByLocationViewSet
+    LocationViewSet,
+    ProductCategoryViewSet,
+    UnitOfMeasureViewSet,
+    StockByLocationViewSet,
+    MLDataExportView,
+    MLForecastUpdateView,
+    BlockchainAuditView,
+    VendorViewSet,
+    PurchaseOrderViewSet,
+    PriceHistoryViewSet,
+    BestVendorPriceView,
 )
 
 router = DefaultRouter()
@@ -40,10 +48,31 @@ router.register(r'locations', LocationViewSet)
 router.register(r'categories', ProductCategoryViewSet)
 router.register(r'uom', UnitOfMeasureViewSet)
 router.register(r'inventory-state', StockByLocationViewSet)
+router.register(r'vendors', VendorViewSet)
+router.register(r'purchase-orders', PurchaseOrderViewSet)
+router.register(r'price-history', PriceHistoryViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
+    
+    # API Documentation
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    
+    # API Endpoints
     path('api/kpis/', DashboardKPIView.as_view(), name='dashboard-kpis'),
+    
+    # --- INTEGRATION ENDPOINTS ---
+    # ML Data Exports
+    path('api/ml/export/transactions/', MLDataExportView.as_view(), name='ml-data-export'),
+    # ML Feedback/Update
+    path('api/ml/update/forecast/', MLForecastUpdateView.as_view(), name='ml-forecast-update'),
+    # Blockchain Callback
+    path('api/blockchain/audit/', BlockchainAuditView.as_view(), name='blockchain-audit-callback'),
+    # Best Vendor Price
+    path('api/best-vendor-price/', BestVendorPriceView.as_view(), name='best-vendor-price'),
+    
     path('api/', include(router.urls)),
 ]

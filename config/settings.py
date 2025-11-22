@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_filters',  # for advanced filtering
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_spectacular',  # API documentation
     'django_otp',
     'inventory_core',
 ]
@@ -137,3 +139,28 @@ AUTHENTICATION_BACKENDS = [
 
 # Configure settings for django-otp
 OTP_EMAIL_SENDER = 'no-reply@stockmaster.com' # Replace with actual sender if using email OTP
+
+# --- REST Framework Configuration ---
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',  # keep open for dev, but auth now works
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ],
+}
+
+# --- DRF Spectacular Settings ---
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'StockMaster API',
+    'DESCRIPTION': 'Comprehensive Inventory Management System API with ML integration',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,
+}

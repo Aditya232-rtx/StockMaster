@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.db import transaction, models
 from django.contrib.contenttypes.models import ContentType
-from .models import Product, Receipt, Location, StockTransaction, StockByLocation, ReceiptLineItem, DeliveryOrder, InternalTransfer, StockAdjustment, ProductCategory, UnitOfMeasure, DeliveryLineItem, TransferLineItem, AdjustmentLineItem
+from .models import Product, Receipt, Location, StockTransaction, StockByLocation, ReceiptLineItem, DeliveryOrder, InternalTransfer, StockAdjustment, ProductCategory, UnitOfMeasure, DeliveryLineItem, TransferLineItem, AdjustmentLineItem, Vendor, PurchaseOrder, PurchaseOrderLineItem, PriceHistory
 
 class ProductSerializer(serializers.ModelSerializer):
     initial_stock = serializers.DecimalField(max_digits=12, decimal_places=3, write_only=True, required=False, min_value=0)
@@ -215,6 +215,43 @@ class DeliveryOrderSerializer(serializers.ModelSerializer):
             # The database's CheckConstraint (quantity >= 0) acts as a final fail-safe.
         return delivery
 
+class VendorSerializer(serializers.ModelSerializer):
+    """Serializer for Vendor model"""
+    class Meta:
+        model = Vendor
+        fields = ['id', 'code', 'name', 'email', 'phone', 'address', 'reliability_score', 'payment_terms', 'is_active', 'created_at', 'updated_at']
+
+class PurchaseOrderLineItemSerializer(serializers.ModelSerializer):
+    """Serializer for PurchaseOrderLineItem with product SKU"""
+    product_sku = serializers.CharField(source='product.sku', read_only=True)
+    class Meta:
+        model = PurchaseOrderLineItem
+        fields = ['id', 'product', 'product_sku', 'quantity', 'unit_price', 'received_quantity', 'notes']
+
+class PurchaseOrderSerializer(serializers.ModelSerializer):
+    """Serializer for PurchaseOrder with nested line items"""
+    items = PurchaseOrderLineItemSerializer(many=True, write_only=True)
+    vendor = VendorSerializer(read_only=True)
+    vendor_id = serializers.PrimaryKeyRelatedField(queryset=Vendor.objects.all(), source='vendor', write_only=True)
+    class Meta:
+        model = PurchaseOrder
+        fields = ['id', 'po_number', 'vendor', 'vendor_id', 'order_date', 'expected_delivery_date', 'status', 'total_amount', 'notes', 'created_at', 'updated_at', 'items']
+        read_only_fields = ['status', 'total_amount', 'created_at', 'updated_at']
+    def create(self, validated_data):
+        items_data = validated_data.pop('items')
+        with transaction.atomic():
+            po = PurchaseOrder.objects.create(**validated_data)
+            for item in items_data:
+                PurchaseOrderLineItem.objects.create(purchase_order=po, **item)
+        return po
+
+class PriceHistorySerializer(serializers.ModelSerializer):
+    """Serializer for PriceHistory with product SKU and vendor code"""
+    product_sku = serializers.CharField(source='product.sku', read_only=True)
+    vendor_code = serializers.CharField(source='vendor.code', read_only=True)
+    class Meta:
+        model = PriceHistory
+        fields = ['id', 'product', 'product_sku', 'vendor', 'vendor_code', 'price', 'effective_date', 'currency', 'notes']
 class TransferLineItemSerializer(serializers.ModelSerializer):
     """Defines the expected input structure for an item being transferred."""
     product_sku = serializers.SlugRelatedField(source='product', slug_field='sku', queryset=Product.objects.all())
@@ -222,7 +259,6 @@ class TransferLineItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = TransferLineItem
         fields = ['product_sku', 'quantity']
-
 class InternalTransferSerializer(serializers.ModelSerializer):
     """The main serializer for the Internal Transfer document."""
     items = TransferLineItemSerializer(many=True) # Changed to allow read/write
@@ -434,3 +470,34 @@ class StockByLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = StockByLocation
         fields = ['id', 'product', 'location', 'product_sku', 'product_name', 'location_name', 'quantity', 'updated_at']
+
+# --- ML Integration Serializers ---
+
+class MLDataExportSerializer(serializers.ModelSerializer):
+    """
+    Serializer to expose StockTransaction data for ML training/inference.
+    Flattens related fields for easier consumption by ML pipelines.
+    """
+    product_sku = serializers.CharField(source='product.sku', read_only=True)
+    location_name = serializers.CharField(source='location.name', read_only=True)
+    product_category = serializers.CharField(source='product.category.name', read_only=True)
+    product_uom = serializers.CharField(source='product.uom.name', read_only=True)
+    is_debit = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = StockTransaction
+        fields = [
+            'timestamp', 
+            'product_sku', 
+            'location_name', 
+            'quantity_change', 
+            'document_type',
+            'is_debit',
+            'product_category',
+            'product_uom'
+        ]
+    
+    def get_is_debit(self, obj):
+        """Determine if the transaction is a debit (stock decrease) or credit (stock increase)."""
+        return obj.quantity_change < 0
+

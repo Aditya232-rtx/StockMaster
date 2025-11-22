@@ -4,3 +4,5 @@ python-dotenv
 djangorestframework
 django-otp
 python-decouple
+drf-spectacular
+django-filter

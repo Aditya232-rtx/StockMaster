@@ -151,6 +151,7 @@ class MovementBase(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='DRAFT', db_index=True)
     notes = models.TextField(blank=True)
+    blockchain_hash = models.CharField(max_length=256, blank=True, null=True, help_text='Hash from blockchain for provenance')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
