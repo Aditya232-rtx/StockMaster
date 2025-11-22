@@ -1,0 +1,8 @@
+purchase_price_std
+purchase_price_min
+purchase_price_max
+unit_cost_mean
+unit_cost_std
+reliability_score_mean
+reliability_score_min
+reliability_score_max
