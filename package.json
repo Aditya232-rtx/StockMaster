@@ -1,0 +1,19 @@
+{
+  "name": "blockchain-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "deploy:hardhat": "npx hardhat run scripts/deploy.js --network hardhat",
+    "deploy:sepolia": "npx hardhat run scripts/deploy.js --network sepolia"
+  },
+  "devDependencies": {
+    "hardhat": "^2.17.0",
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "ethers": "^6.9.0",
+    "dotenv": "^16.3.1",
+    "@openzeppelin/contracts": "^4.9.5",
+    "chai": "^4.3.10"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name":"qr-generator",
+  "version":"1.0.0",
+  "private": true,
+  "scripts": {
+    "gen": "node generate.js",
+    "bulk": "node bulk.js"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.0",
+    "ipfs-http-client": "^60.0.0"
+  }
+}

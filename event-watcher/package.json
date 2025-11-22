@@ -1,0 +1,13 @@
+{
+  "name":"event-watcher",
+  "version":"1.0.0",
+  "private":true,
+  "scripts": {
+    "start": "node watcher.js"
+  },
+  "dependencies": {
+    "ethers": "^5.7.0",
+    "dotenv": "^16.0.0",
+    "node-fetch": "^2.6.7"
+  }
+}

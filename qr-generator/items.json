@@ -1,0 +1,14 @@
+[
+  {
+    "itemId": "TEST001",
+    "itemHash": "eae4979121a038c8fb54b4347e5094bf8667f222cc8b9f74a87f3bedcdb9d727",
+    "metadata": {
+      "itemName": "Test Product",
+      "quantity": 5,
+      "pricePerItem": 99.99,
+      "dispatchTime": "2025-11-22T07:50:59.851Z",
+      "dispatchPlace": "Unknown Location"
+    },
+    "createdAt": "2025-11-22T07:50:59.946Z"
+  }
+]
