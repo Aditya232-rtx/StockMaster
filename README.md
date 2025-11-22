@@ -328,7 +328,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 For support, email your-email@example.com or open an issue in the GitHub repository.
 
 ## 🔗 Links
-
+Demo video Link-https://drive.google.com/drive/folders/12Ju7ln4EUEQcRGThfMNOmLMeYBRbNHqn?usp=sharing
 - [GitHub Repository](https://github.com/Aditya232-rtx/StockMaster)
 - [Issue Tracker](https://github.com/Aditya232-rtx/StockMaster/issues)
 - [Documentation](https://github.com/Aditya232-rtx/StockMaster/wiki)
