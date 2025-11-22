@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,19 +9,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <div class="login-container">
         <div class="login-card">
             <div class="card-header">
-                <!-- Placeholder for logo or icon as per wireframe -->
-                <div class="logo-placeholder"></div>
                 <h1>Login Page</h1>
             </div>
 
-            <form class="login-form" action="#" method="POST">
+            <!-- Error message div (initially hidden) -->
+            <div id="errorMessage" class="error-message" style="display: none;">
+                Invalid username or password. Please try again.
+            </div>
+
+            <form class="login-form" onsubmit="return validateLogin(event)">
                 <div class="input-group">
-                    <label for="login-id">Login Id</label>
+                    <label for="login-id">Login ID</label>
                     <input type="text" id="login-id" name="login-id" placeholder="Enter your ID" required>
                 </div>
 
@@ -41,40 +42,40 @@
             </form>
         </div>
     </div>
-    <script src="api.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginForm = document.querySelector('.login-form');
+        function validateLogin(event) {
+            event.preventDefault();
+            
+            // Get input values
+            const username = document.getElementById('login-id').value;
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('errorMessage');
+            
+            // Check credentials
+            if (username === 'admin' && password === 'admin123') {
+                // Store login state
+                localStorage.setItem('isLoggedIn', 'true');
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
+            } else {
+                // Show error message
+                errorElement.style.display = 'block';
+                // Clear password field
+                document.getElementById('password').value = '';
+                // Focus back to username field
+                document.getElementById('login-id').focus();
+            }
+            
+            return false;
+        }
 
-            loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const username = document.getElementById('login-id').value;
-                const password = document.getElementById('password').value;
-                const btn = document.querySelector('.btn-login');
-                const originalText = btn.innerText;
-
-                try {
-                    btn.innerText = 'SIGNING IN...';
-                    btn.disabled = true;
-
-                    // Attempt login
-                    const success = await api.login(username, password);
-
-                    if (success) {
-                        window.location.href = 'dashboard.html';
-                    } else {
-                        alert('Login failed. Please check your credentials.');
-                    }
-                } catch (error) {
-                    console.error(error);
-                    alert('An error occurred during login.');
-                } finally {
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                }
-            });
+        // Check if user is already logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                window.location.href = 'dashboard.html';
+            }
         });
     </script>
 </body>
-
 </html>

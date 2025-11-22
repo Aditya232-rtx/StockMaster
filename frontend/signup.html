@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | FEC Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="signup.css">
+</head>
+
+<body>
+    <div class="signup-container">
+        <div class="signup-card">
+            <div class="card-header">
+                <div class="logo-placeholder"></div>
+                <h1>Create Account</h1>
+                <p class="subtitle">Fill in your details to get started</p>
+            </div>
+
+            <form class="signup-form" action="#" method="POST">
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="first-name">First Name</label>
+                        <div class="input-with-icon">
+                            <span class="material-icons-round">person</span>
+                            <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="last-name">Last Name</label>
+                        <div class="input-with-icon">
+                            <span class="material-icons-round">person_outline</span>
+                            <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-with-icon">
+                        <span class="material-icons-round">email</span>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="phone">Phone Number</label>
+                    <div class="input-with-icon">
+                        <span class="material-icons-round">phone</span>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <span class="material-icons-round">lock</span>
+                        <input type="password" id="password" name="password" placeholder="Create a password" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <div class="input-with-icon">
+                        <span class="material-icons-round">lock_outline</span>
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                    </div>
+                </div>
+
+                <div class="terms-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="#" class="link">Terms & Conditions</a> and <a href="#" class="link">Privacy Policy</a></label>
+                </div>
+
+                <button type="submit" class="btn-signup">SIGN UP</button>
+
+                <div class="form-footer">
+                    Already have an account? <a href="index.html" class="link">Sign In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

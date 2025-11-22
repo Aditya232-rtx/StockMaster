@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Delivery | StockMaster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="new_delivery.css">
+</head>
+
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <span class="material-icons-round">dashboard</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item" title="Home">
+                    <span class="material-icons-round">home</span>
+                </a>
+                <a href="operation.html" class="nav-item active" title="Operations">
+                    <span class="material-icons-round">settings_suggest</span>
+                </a>
+                <a href="stock.html" class="nav-item" title="Stock">
+                    <span class="material-icons-round">inventory_2</span>
+                </a>
+                <a href="#" class="nav-item" title="Move History">
+                    <span class="material-icons-round">history</span>
+                </a>
+                <a href="#" class="nav-item" title="Settings">
+                    <span class="material-icons-round">settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-bar">
+                <div class="breadcrumb">
+                    <a href="dashboard.html">Dashboard</a>
+                    <span class="separator">></span>
+                    <a href="operation.html">Operations</a>
+                    <span class="separator">></span>
+                    <span class="current">New Delivery</span>
+                </div>
+                <div class="user-account">
+                    <span class="material-icons-round">account_circle</span>
+                </div>
+            </header>
+
+            <!-- Form Container -->
+            <div class="form-container">
+                <div class="form-header">
+                    <div class="form-tabs">
+                        <button class="tab-btn active">New</button>
+                        <span class="tab-title">Receipt</span>
+                    </div>
+                    <div class="header-buttons">
+                        <button class="btn-action">Validate</button>
+                        <button class="btn-action">Print</button>
+                        <button class="btn-action">Cancel</button>
+                        <div class="status-buttons">
+                            <button class="status-btn">Draft</button>
+                            <button class="status-btn">Ready</button>
+                            <button class="status-btn">Done</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Content -->
+                <div class="form-content">
+                    <!-- Document Number -->
+                    <div class="form-row full-width">
+                        <label class="form-label">Document Number</label>
+                        <input type="text" class="form-input" id="document-number" placeholder="WH/IN/0001" readonly>
+                    </div>
+
+                    <!-- Receive From & Schedule Date -->
+                    <div class="form-row two-columns">
+                        <div class="form-group">
+                            <label class="form-label">Receive From</label>
+                            <input type="text" class="form-input" id="receive-from" placeholder="Select vendor">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Schedule Date</label>
+                            <input type="date" class="form-input" id="schedule-date">
+                        </div>
+                    </div>
+
+                    <!-- Responsible -->
+                    <div class="form-row full-width">
+                        <label class="form-label">Responsible</label>
+                        <input type="text" class="form-input" id="responsible" placeholder="Select responsible person">
+                    </div>
+
+                    <!-- Products Section -->
+                    <div class="products-section">
+                        <h3 class="section-title">Products</h3>
+                        <div class="product-table-wrapper">
+                            <table class="product-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="products-tbody">
+                                    <tr class="product-row">
+                                        <td>
+                                            <input type="text" class="table-input" placeholder="[DESKC001] Desk"
+                                                value="[DESKC001] Desk">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="table-input" value="6" min="1">
+                                        </td>
+                                        <td>
+                                            <button class="btn-remove" onclick="removeProduct(this)">
+                                                <span class="material-icons-round">delete</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="btn-add-product" onclick="addNewProduct()">
+                            <span class="material-icons-round">add</span>
+                            New Product
+                        </button>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="form-actions">
+                        <button class="btn-save" onclick="saveDelivery()">Save Delivery</button>
+                        <button class="btn-cancel" onclick="window.location.href='operation.html'">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="api.js"></script>
+    <script>
+        // Initialize form
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('schedule-date').value = today;
+
+            // Generate document number
+            generateDocumentNumber();
+        });
+
+        // Generate unique document number
+        function generateDocumentNumber() {
+            const timestamp = Date.now().toString().slice(-6);
+            document.getElementById('document-number').value = `WH/OUT/${timestamp}`;
+        }
+
+        // Add new product row
+        function addNewProduct() {
+            const tbody = document.getElementById('products-tbody');
+            const newRow = document.createElement('tr');
+            newRow.className = 'product-row';
+            newRow.innerHTML = `
+                <td>
+                    <input type="text" class="table-input" placeholder="Select product">
+                </td>
+                <td>
+                    <input type="number" class="table-input" value="1" min="1">
+                </td>
+                <td>
+                    <button class="btn-remove" onclick="removeProduct(this)">
+                        <span class="material-icons-round">delete</span>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(newRow);
+        }
+
+        // Remove product row
+        function removeProduct(button) {
+            const row = button.closest('tr');
+            const tbody = document.getElementById('products-tbody');
+
+            // Don't remove if it's the last row
+            if (tbody.children.length > 1) {
+                row.remove();
+            } else {
+                alert('At least one product is required');
+            }
+        }
+
+        // Save delivery
+        async function saveDelivery() {
+            const documentNumber = document.getElementById('document-number').value;
+            const receiveFrom = document.getElementById('receive-from').value;
+            const scheduleDate = document.getElementById('schedule-date').value;
+            const responsible = document.getElementById('responsible').value;
+
+            // Collect products
+            const products = [];
+            const rows = document.querySelectorAll('.product-row');
+            rows.forEach(row => {
+                const productInput = row.querySelector('td:nth-child(1) input');
+                const quantityInput = row.querySelector('td:nth-child(2) input');
+
+                if (productInput.value && quantityInput.value) {
+                    products.push({
+                        product: productInput.value,
+                        quantity: parseInt(quantityInput.value)
+                    });
+                }
+            });
+
+            // Validation
+            if (!receiveFrom) {
+                alert('Please enter "Receive From"');
+                return;
+            }
+            if (!scheduleDate) {
+                alert('Please select a schedule date');
+                return;
+            }
+            if (products.length === 0) {
+                alert('Please add at least one product');
+                return;
+            }
+
+            // Create delivery object
+            const deliveryData = {
+                document_number: documentNumber,
+                customer: receiveFrom,
+                date: scheduleDate,
+                responsible: responsible,
+                status: 'Draft',
+                items: products.map(p => ({
+                    product: p.product,
+                    quantity: p.quantity,
+                    location: 'Default Location' // You can add location field if needed
+                }))
+            };
+
+            console.log('Saving delivery:', deliveryData);
+
+            // TODO: Send to backend API
+            // try {
+            //     const response = await api.createDelivery(deliveryData);
+            //     alert('Delivery saved successfully!');
+            //     window.location.href = 'operation.html';
+            // } catch (error) {
+            //     console.error('Error saving delivery:', error);
+            //     alert('Failed to save delivery');
+            // }
+
+            // For now, just show success and redirect
+            alert('Delivery saved successfully!');
+            window.location.href = 'operation.html';
+        }
+    </script>
+</body>
+
+</html>
