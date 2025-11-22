@@ -4,3 +4,7 @@ __pycache__/
 db.sqlite3
 venv/
 .DS_Store
+
+# ML Dataset CSV files (generated, not source code)
+ml_data_*.csv
+dataset_generation.log

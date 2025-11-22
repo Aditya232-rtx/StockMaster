@@ -31,6 +31,12 @@ class Product(models.Model):
     uom = models.ForeignKey(UnitOfMeasure, on_delete=models.PROTECT, related_name='products')
     description = models.TextField(blank=True)
     low_stock_threshold = models.PositiveIntegerField(default=10)
+    
+    # ML-related fields
+    unit_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0, help_text="Average unit cost")
+    reorder_quantity = models.PositiveIntegerField(default=100, help_text="Default reorder quantity")
+    lead_time_days = models.PositiveIntegerField(default=7, help_text="Average lead time in days")
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -45,6 +51,75 @@ class Location(models.Model):
 
     def __str__(self):
         return self.name
+
+# --- Vendor & Purchase Order Models ---
+
+class Vendor(models.Model):
+    code = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=200)
+    email = models.EmailField(blank=True)
+    phone = models.CharField(max_length=20, blank=True)
+    address = models.TextField(blank=True)
+    reliability_score = models.PositiveIntegerField(default=85, validators=[MinValueValidator(0)], help_text="0-100 score")
+    payment_terms = models.PositiveIntegerField(default=30, help_text="Payment terms in days")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.code})"
+
+class PurchaseOrder(models.Model):
+    STATUS_CHOICES = [
+        ('DRAFT', 'Draft'),
+        ('SENT', 'Sent to Vendor'),
+        ('CONFIRMED', 'Confirmed by Vendor'),
+        ('RECEIVED', 'Goods Received'),
+        ('CANCELLED', 'Cancelled'),
+    ]
+    
+    po_number = models.CharField(max_length=50, unique=True)
+    vendor = models.ForeignKey(Vendor, on_delete=models.PROTECT, related_name='purchase_orders')
+    order_date = models.DateTimeField(auto_now_add=True)
+    expected_delivery_date = models.DateField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='DRAFT', db_index=True)
+    total_amount = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.po_number} - {self.vendor.name}"
+
+class PurchaseOrderLineItem(models.Model):
+    purchase_order = models.ForeignKey(PurchaseOrder, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    quantity = models.DecimalField(max_digits=15, decimal_places=4, validators=[MinValueValidator(0)])
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    received_quantity = models.DecimalField(max_digits=15, decimal_places=4, default=0)
+    notes = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.quantity} of {self.product.sku} in {self.purchase_order.po_number}"
+
+class PriceHistory(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='price_history')
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='price_history')
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    effective_date = models.DateField(db_index=True)
+    currency = models.CharField(max_length=3, default='USD')
+    notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Price Histories"
+        ordering = ['-effective_date']
+        indexes = [
+            models.Index(fields=['product', 'vendor', '-effective_date']),
+        ]
+
+    def __str__(self):
+        return f"{self.product.sku} from {self.vendor.code}: ${self.price} ({self.effective_date})"
 
 # --- Inventory State & Transaction Models ---
 
@@ -87,6 +162,8 @@ class MovementBase(models.Model):
 
 class Receipt(MovementBase):
     vendor = models.CharField(max_length=100, blank=True)
+    purchase_order = models.ForeignKey(PurchaseOrder, on_delete=models.SET_NULL, null=True, blank=True, related_name='receipts')
+    received_date = models.DateField(null=True, blank=True)
     # Additional fields specific to receipts can go here
 
 class ReceiptLineItem(models.Model):
