@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operations | FEC Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="operation.css">
+</head>
+
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <span class="material-icons-round">dashboard</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item" title="Home">
+                    <span class="material-icons-round">home</span>
+                </a>
+                <a href="operation.html" class="nav-item active" title="Operations">
+                    <span class="material-icons-round">settings_suggest</span>
+                </a>
+                <a href="stock.html" class="nav-item" title="Stock">
+                    <span class="material-icons-round">inventory_2</span>
+                </a>
+                <a href="#" class="nav-item" title="Move History">
+                    <span class="material-icons-round">history</span>
+                </a>
+                <a href="#" class="nav-item" title="Settings">
+                    <span class="material-icons-round">settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-bar">
+                <div class="page-title">Operations</div>
+                <div class="user-account">
+                    <span class="material-icons-round">account_circle</span>
+                </div>
+            </header>
+
+            <!-- In-page Navigation (Tabs) -->
+            <nav class="inpage-nav">
+                <a href="#" class="tab-link active" data-tab="receipts">Receipts</a>
+                <a href="#" class="tab-link" data-tab="delivery">Delivery</a>
+                <a href="#" class="tab-link" data-tab="adjustment">Adjustment</a>
+                <a href="#" class="tab-link" data-tab="transfer">Internal Transfer</a>
+            </nav>
+
+            <!-- Tab Contents -->
+            <section class="content-container">
+
+                <!-- Receipts Tab -->
+                <div id="receipts" class="tab-content active">
+                    <div class="table-controls">
+                        <button class="btn-new">NEW</button>
+                        <h2 class="tab-title">Receipts</h2>
+                        <div class="controls-right">
+                            <button class="icon-btn"><span class="material-icons-round">search</span></button>
+                            <button class="icon-btn"><span
+                                    class="material-icons-round">format_list_bulleted</span></button>
+                            <button class="icon-btn"><span class="material-icons-round">view_kanban</span></button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Contact</th>
+                                    <th>Schedule date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="ref-col">WH/IN/0001</td>
+                                    <td>Vendor</td>
+                                    <td>WH/Stock1</td>
+                                    <td class="contact-col">Azure Interior</td>
+                                    <td></td>
+                                    <td class="status-ready">Ready</td>
+                                </tr>
+                                <tr>
+                                    <td class="ref-col">WH/IN/0002</td>
+                                    <td>Vendor</td>
+                                    <td>WH/Stock1</td>
+                                    <td class="contact-col">Azure Interior</td>
+                                    <td></td>
+                                    <td class="status-ready">Ready</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Delivery Tab -->
+                <div id="delivery" class="tab-content">
+                    <div class="table-controls">
+                        <button class="btn-new">NEW</button>
+                        <h2 class="tab-title">Delivery</h2>
+                        <div class="controls-right">
+                            <button class="icon-btn"><span class="material-icons-round">search</span></button>
+                            <button class="icon-btn"><span
+                                    class="material-icons-round">format_list_bulleted</span></button>
+                            <button class="icon-btn"><span class="material-icons-round">view_kanban</span></button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Contact</th>
+                                    <th>Schedule date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="ref-col">WH/OUT/0001</td>
+                                    <td>WH/Stock1</td>
+                                    <td>Vendor</td>
+                                    <td class="contact-col">Azure Interior</td>
+                                    <td></td>
+                                    <td class="status-ready">Ready</td>
+                                </tr>
+                                <tr>
+                                    <td class="ref-col">WH/OUT/0002</td>
+                                    <td>WH/Stock1</td>
+                                    <td>Vendor</td>
+                                    <td class="contact-col">Azure Interior</td>
+                                    <td></td>
+                                    <td class="status-ready">Ready</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Adjustment Tab -->
+                <div id="adjustment" class="tab-content">
+                    <div class="table-controls">
+                        <button class="btn-new">NEW</button>
+                        <h2 class="tab-title">Inventory Adjustment</h2>
+                        <div class="controls-right">
+                            <button class="icon-btn"><span class="material-icons-round">search</span></button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>Product</th>
+                                    <th>On Hand</th>
+                                    <th>Counted</th>
+                                    <th>Difference</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="ref-col">INV/2023/001</td>
+                                    <td>Widget A</td>
+                                    <td>100</td>
+                                    <td>90</td>
+                                    <td class="diff-neg">-10</td>
+                                    <td class="status-pending">Pending</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Internal Transfer Tab -->
+                <div id="transfer" class="tab-content">
+                    <div class="table-controls">
+                        <button class="btn-new">NEW</button>
+                        <h2 class="tab-title">Internal Transfer</h2>
+                        <div class="controls-right">
+                            <button class="icon-btn"><span class="material-icons-round">search</span></button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="ref-col">WH/INT/0001</td>
+                                    <td>WH/Stock1</td>
+                                    <td>WH/Stock2</td>
+                                    <td>Component X</td>
+                                    <td>50</td>
+                                    <td class="status-done">Done</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+    <script src="operation.js"></script>
+</body>
+
+</html>

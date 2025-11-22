@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | FEC Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <span class="material-icons-round">dashboard</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active" title="Home">
+                    <span class="material-icons-round">home</span>
+                </a>
+                <a href="operation.html" class="nav-item" title="Operations">
+                    <span class="material-icons-round">settings_suggest</span>
+                </a>
+                <a href="stock.html" class="nav-item" title="Stock">
+                    <span class="material-icons-round">inventory_2</span>
+                </a>
+                <a href="#" class="nav-item" title="Move History">
+                    <span class="material-icons-round">history</span>
+                </a>
+                <a href="#" class="nav-item" title="Settings">
+                    <span class="material-icons-round">settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-bar">
+                <div class="page-title">Dashboard</div>
+                <div class="user-account">
+                    <span class="material-icons-round">account_circle</span>
+                </div>
+            </header>
+
+            <!-- In-page Navigation -->
+            <nav class="inpage-nav">
+                <a href="#" class="active">Dashboard</a>
+                <a href="#">Auto Mapping</a>
+                <a href="#">Data Connections</a>
+                <a href="#">Settings</a>
+            </nav>
+
+            <!-- Large Container -->
+            <section class="content-container">
+                <div class="status-boxes">
+                    <!-- Receipt Box -->
+                    <div class="box receipt-box">
+                        <div class="box-header">
+                            <h3>Receipt</h3>
+                        </div>
+                        <div class="box-content">
+                            <div class="status-btn">
+                                <span class="count">4</span>
+                                <span class="label">to receive</span>
+                            </div>
+                            <div class="status-list">
+                                <div class="list-item">
+                                    <span class="count">1</span>
+                                    <span class="label">Late</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="count">6</span>
+                                    <span class="label">operations</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Box -->
+                    <div class="box delivery-box">
+                        <div class="box-header">
+                            <h3>Delivery</h3>
+                        </div>
+                        <div class="box-content">
+                            <div class="status-btn">
+                                <span class="count">4</span>
+                                <span class="label">to Deliver</span>
+                            </div>
+                            <div class="status-list">
+                                <div class="list-item">
+                                    <span class="count">1</span>
+                                    <span class="label">Late</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="count">2</span>
+                                    <span class="label">waiting</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="count">6</span>
+                                    <span class="label">operations</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

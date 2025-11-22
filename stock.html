@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock | FEC Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="stock.css">
+</head>
+
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <span class="material-icons-round">dashboard</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item" title="Home">
+                    <span class="material-icons-round">home</span>
+                </a>
+                <a href="operation.html" class="nav-item" title="Operations">
+                    <span class="material-icons-round">settings_suggest</span>
+                </a>
+                <a href="stock.html" class="nav-item active" title="Stock">
+                    <span class="material-icons-round">inventory_2</span>
+                </a>
+                <a href="#" class="nav-item" title="Move History">
+                    <span class="material-icons-round">history</span>
+                </a>
+                <a href="#" class="nav-item" title="Settings">
+                    <span class="material-icons-round">settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-bar">
+                <div class="page-title">Stock</div>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <span class="material-icons-round">search</span>
+                        <input type="text" placeholder="Search products...">
+                    </div>
+                    <div class="user-account">
+                        <span class="material-icons-round">account_circle</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Container -->
+            <section class="content-container">
+                <!-- Table Widget (The container that gets #F8F7FE) -->
+                <div class="table-widget">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>per unit cost</th>
+                                    <th>On hand</th>
+                                    <th>free to Use</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="product-name">Desk</td>
+                                    <td>3000 Rs</td>
+                                    <td>50</td>
+                                    <td>45</td>
+                                    <td>
+                                        <button class="btn-update">Update</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Table</td>
+                                    <td>3000 Rs</td>
+                                    <td>50</td>
+                                    <td>50</td>
+                                    <td>
+                                        <button class="btn-update">Update</button>
+                                    </td>
+                                </tr>
+                                <!-- Placeholder rows for dotted line effect -->
+                                <tr class="empty-row">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="empty-row">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

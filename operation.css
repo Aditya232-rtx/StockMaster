@@ -1,0 +1,335 @@
+/* Reuse variables from dashboard.css where possible, but defining here for standalone file as requested */
+:root {
+    --bg-main: #EDF6F7;
+    --bg-container: #F8F7FE;
+    /* "Other things" background */
+    --bg-table: #FFFFFD;
+    /* Table background */
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --accent-color: #e53935;
+    /* Red/Pink accent from wireframe */
+    --sidebar-bg: #ffffff;
+    --font-family: 'Outfit', sans-serif;
+    --border-radius: 16px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.dashboard-wrapper {
+    display: flex;
+    height: 100%;
+}
+
+/* Sidebar (Copied from dashboard.css for consistency) */
+.sidebar {
+    width: 80px;
+    background-color: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-logo {
+    margin-bottom: 40px;
+    color: #333;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 12px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+}
+
+.nav-item {
+    color: #999;
+    padding: 12px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: var(--text-primary);
+    background-color: #f5f5f5;
+}
+
+.nav-item.active {
+    background-color: #e0f7fa;
+    color: #00acc1;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    overflow-y: auto;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.user-account {
+    color: #fbc02d;
+    cursor: pointer;
+    font-size: 2rem;
+    background-color: #EDF6F7;
+    /* Requested specific bg */
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.user-account .material-icons-round {
+    font-size: 2.5rem;
+}
+
+/* In-page Navigation (Tabs) */
+.inpage-nav {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 10px;
+}
+
+.tab-link {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding-bottom: 10px;
+    position: relative;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.tab-link:hover,
+.tab-link.active {
+    color: var(--text-primary);
+}
+
+.tab-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -11px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-primary);
+    border-radius: 3px 3px 0 0;
+}
+
+/* Content Container */
+.content-container {
+    background-color: var(--bg-container);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    flex: 1;
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-content {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+}
+
+.tab-content.active {
+    display: flex;
+}
+
+/* Table Controls */
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--accent-color);
+    /* Red line from wireframe */
+    padding-bottom: 10px;
+}
+
+.btn-new {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-new:hover {
+    background: var(--accent-color);
+    color: white;
+}
+
+.tab-title {
+    color: var(--accent-color);
+    font-family: 'Handlee', cursive;
+    /* Fallback to sans-serif if not loaded */
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.controls-right {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--accent-color);
+    /* Red icons */
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.icon-btn:hover {
+    background: rgba(229, 57, 53, 0.1);
+}
+
+/* Table Styling */
+.table-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    background-color: var(--bg-table);
+    border-radius: 12px;
+    border: 1px solid var(--accent-color);
+    /* Red border around table area */
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+th {
+    text-align: left;
+    padding: 15px;
+    color: var(--accent-color);
+    /* Red headers */
+    font-weight: 600;
+    border-bottom: 1px solid rgba(229, 57, 53, 0.2);
+}
+
+td {
+    padding: 15px;
+    color: var(--text-primary);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.ref-col {
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+.contact-col {
+    color: var(--accent-color);
+}
+
+.status-ready {
+    color: #4caf50;
+    font-weight: 600;
+}
+
+.status-pending {
+    color: #ff9800;
+    font-weight: 600;
+}
+
+.status-done {
+    color: #2196f3;
+    font-weight: 600;
+}
+
+.diff-neg {
+    color: #f44336;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-wrapper {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 20px;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        width: auto;
+        gap: 10px;
+    }
+
+    .sidebar-logo {
+        margin-bottom: 0;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+}

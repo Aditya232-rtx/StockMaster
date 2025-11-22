@@ -1,0 +1,269 @@
+:root {
+    --bg-main: #EDF6F7;
+    --bg-container: #FFFFFD;
+    --bg-box: #F8F7FE;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --accent-color: #ff4757;
+    /* Keeping the accent from login for consistency, or can be neutral */
+    --sidebar-bg: #ffffff;
+    --font-family: 'Outfit', sans-serif;
+    --border-radius: 16px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.dashboard-wrapper {
+    display: flex;
+    height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 80px;
+    background-color: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-logo {
+    margin-bottom: 40px;
+    color: #333;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 12px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+}
+
+.nav-item {
+    color: #999;
+    padding: 12px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: var(--text-primary);
+    background-color: #f5f5f5;
+}
+
+.nav-item.active {
+    background-color: #e0f7fa;
+    /* Light cyan tint for active state */
+    color: #00acc1;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    overflow-y: auto;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.user-account {
+    color: #fbc02d;
+    /* Yellowish icon color from reference */
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.user-account .material-icons-round {
+    font-size: 2.5rem;
+}
+
+/* In-page Navigation */
+.inpage-nav {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 10px;
+}
+
+.inpage-nav a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding-bottom: 10px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.inpage-nav a:hover,
+.inpage-nav a.active {
+    color: var(--text-primary);
+}
+
+.inpage-nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -11px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-primary);
+    border-radius: 3px 3px 0 0;
+}
+
+/* Content Container */
+.content-container {
+    background-color: var(--bg-container);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    flex: 1;
+    box-shadow: var(--box-shadow);
+}
+
+.status-boxes {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.box {
+    background-color: var(--bg-box);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    flex: 1;
+    min-width: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.box-header h3 {
+    color: #ff4757;
+    /* Red color for headers as per sketch */
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-family: 'Handlee', cursive;
+    /* Trying to mimic the sketch font style if possible, otherwise fallback */
+    font-family: var(--font-family);
+}
+
+/* Specific styling to mimic the sketch's red headers */
+.receipt-box .box-header h3,
+.delivery-box .box-header h3 {
+    color: #e53935;
+    font-size: 1.2rem;
+}
+
+.box-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.status-btn {
+    border: 2px solid #e53935;
+    border-radius: 12px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e53935;
+    font-weight: 600;
+    background: white;
+    box-shadow: 0 4px 10px rgba(229, 57, 53, 0.1);
+}
+
+.status-btn .count {
+    font-size: 1.2rem;
+}
+
+.status-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.list-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #e53935;
+    font-weight: 500;
+}
+
+.list-item .count {
+    font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-wrapper {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 20px;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        width: auto;
+        gap: 10px;
+    }
+
+    .sidebar-logo {
+        margin-bottom: 0;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .status-boxes {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move History | FEC Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="history.css">
+</head>
+
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <span class="material-icons-round">dashboard</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item" title="Home">
+                    <span class="material-icons-round">home</span>
+                </a>
+                <a href="operation.html" class="nav-item" title="Operations">
+                    <span class="material-icons-round">settings_suggest</span>
+                </a>
+                <a href="stock.html" class="nav-item" title="Stock">
+                    <span class="material-icons-round">inventory_2</span>
+                </a>
+                <a href="history.html" class="nav-item active" title="Move History">
+                    <span class="material-icons-round">history</span>
+                </a>
+                <a href="#" class="nav-item" title="Settings">
+                    <span class="material-icons-round">settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-bar">
+                <div class="page-title">Move History</div>
+                <div class="user-account">
+                    <span class="material-icons-round">account_circle</span>
+                </div>
+            </header>
+
+            <!-- Content Container -->
+            <section class="content-container">
+                <!-- Controls Bar -->
+                <div class="controls-bar">
+                    <div class="left-controls">
+                        <button class="btn-new">NEW</button>
+                    </div>
+                    <div class="right-controls">
+                        <div class="search-box">
+                            <span class="material-icons-round">search</span>
+                        </div>
+                        <button class="icon-btn"><span class="material-icons-round">format_list_bulleted</span></button>
+                        <button class="icon-btn"><span class="material-icons-round">view_kanban</span></button>
+                    </div>
+                </div>
+
+                <!-- Table Widget -->
+                <div class="table-widget">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>Date</th>
+                                    <th>Contact</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="move-in">
+                                    <td>WH/IN/0001</td>
+                                    <td>12/1/2001</td>
+                                    <td>Azure Interior</td>
+                                    <td>vendor</td>
+                                    <td>WH/Stock1</td>
+                                    <td></td>
+                                    <td>Ready</td>
+                                </tr>
+                                <tr class="move-out">
+                                    <td>WH/OUT/0002</td>
+                                    <td>12/1/2001</td>
+                                    <td>Azure Interior</td>
+                                    <td>WH/Stock1</td>
+                                    <td>vendor</td>
+                                    <td></td>
+                                    <td>Ready</td>
+                                </tr>
+                                <tr class="move-out">
+                                    <td>WH/OUT/0002</td>
+                                    <td>12/1/2001</td>
+                                    <td>Azure Interior</td>
+                                    <td>WH/Stock2</td>
+                                    <td>vendor</td>
+                                    <td></td>
+                                    <td>Ready</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
